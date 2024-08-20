@@ -15,8 +15,10 @@ const TopPage = () => {
   return (
     <div>
       <h1>トップ画面</h1>
-      <button onClick={handleCashbookClick}>現金出納帳</button>
-      <button onClick={handleCreditbookClick}>クレジット出納帳</button>
+      <div>
+        <button onClick={handleCashbookClick} class="bg-blue-500 hover:bg-blue-300 text-white font-bold py-2 px-4">現金出納帳</button>
+        <button onClick={handleCreditbookClick} class="bg-red-500 hover:bg-red-300 text-white font-bold py-2 px-4">クレジット出納帳</button>
+      </div>
     </div>
   );
 };
