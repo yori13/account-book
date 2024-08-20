@@ -1,35 +1,46 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const CashbookForm = () => {
   // 初期のフォームデータセットを空の配列で初期化
   const [entries, setEntries] = useState([
-    { date: '', item: '', memo: '', type: 0, price: '', tax: false }
+    { date: '', itemCode: '', memo: '', priceTypeCode: '', price: '', tax: false }
   ]);
 
   // フォームの入力値を更新する関数
   const handleChange = (index, e) => {
     const { name, value, type, checked } = e.target;
     const updatedEntries = [...entries];
+
     if (type === 'radio') {
-      updatedEntries[index] = { ...updatedEntries[index], type: parseInt(value) };
+      updatedEntries[index] = { ...updatedEntries[index], priceTypeCode: parseInt(value, 10) };
     } else if (type === 'checkbox') {
       updatedEntries[index] = { ...updatedEntries[index], [name]: checked };
+    } else if (name === 'itemCode') {
+      updatedEntries[index] = { ...updatedEntries[index], itemCode: parseInt(value, 10) };
     } else {
       updatedEntries[index] = { ...updatedEntries[index], [name]: value };
     }
+
     setEntries(updatedEntries);
   };
 
   // 新しいフォームセットを追加する関数
   const addEntry = () => {
-    setEntries([...entries, { date: '', item: '', memo: '', type: '', price: '', tax: false }]);
+    setEntries([...entries, { date: '', itemCode: '', memo: '', priceTypeCode: '', price: '', tax: false }]);
   };
 
   // フォームの送信処理
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // ここでデータ送信の処理を追加
-    console.log(entries);
+    try {
+      const response = await axios.post('http://localhost:3001/api/cash-account', entries);
+      console.log('Data submitted successfully:', response.data);
+      alert("登録しました");
+    } catch (error) {
+      console.log(entries);
+      console.error('Error submitting data:', error);
+    }
   };
 
   return (
@@ -47,13 +58,18 @@ const CashbookForm = () => {
             />
             
             <label htmlFor={`select-item-${index}`}>費目</label>
-            <input
-              type="text"
-              name="item"
+            <select
+              name="itemCode"
               id={`select-item-${index}`}
-              value={entry.item}
+              value={entry.itemCode}
               onChange={(e) => handleChange(index, e)}
-            />
+            >
+              <option value={0}>選択してください</option>
+              <option value={3}>繰越</option>
+              <option value={1}>消耗品</option>
+              <option value={2}>交通費</option>
+            </select>
+
             
             <label htmlFor={`memo-${index}`}>摘要</label>
             <input
@@ -66,30 +82,30 @@ const CashbookForm = () => {
             
             <input
               type="radio"
-              name={`type-${index}`}
+              name={`priceTypeCode-${index}`}
               value={1}
               id={`debit-${index}`}
-              checked={entry.type === 1}
+              checked={entry.priceTypeCode === 1}
               onChange={(e) => handleChange(index, e)}
             />
             <label htmlFor={`debit-${index}`}>借方</label>
             
             <input
               type="radio"
-              name={`type-${index}`}
+              name={`priceTypeCode-${index}`}
               value={2}
               id={`credit-${index}`}
-              checked={entry.type === 2}
+              checked={entry.priceTypeCode === 2}
               onChange={(e) => handleChange(index, e)}
             />
             <label htmlFor={`credit-${index}`}>貸方</label>
             
             <input
               type="radio"
-              name={`type-${index}`}
+              name={`priceTypeCode-${index}`}
               value={3}
               id={`brought-forward-${index}`}
-              checked={entry.type === 3}
+              checked={entry.priceTypeCode === 3}
               onChange={(e) => handleChange(index, e)}
             />
             <label htmlFor={`brought-forward-${index}`}>繰越金額</label>

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    priceType: {
+    price_type: {
       type: DataTypes.TEXT,
       allowNull: false
     }

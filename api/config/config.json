@@ -3,7 +3,7 @@
     "username": "sa",
     "password": "sa",
     "database": "account-book-db",
-    "host": "localhost",
+    "host": "db",
     "dialect": "mysql"
   }
 }

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    itemCode: {
+    item_code: {
       type: DataTypes.INTEGER,
       references: {
         model: 'cash_item',
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    priceTypeCode: {
+    price_type_code: {
       type: DataTypes.INTEGER,
       references: {
         model: 'cash_price_type',

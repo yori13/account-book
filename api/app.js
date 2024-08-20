@@ -3,11 +3,27 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(cors());
+// 現金出納帳登録 ////
+const bodyParser = require('body-parser');
+const cashAccountRouter = require('./routes/cashAccount');
+
+app.use(bodyParser.json()); // JSONのリクエストボディをパースするためのミドルウェア
+
+app.use('/api/cash-account', cashAccountRouter);
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+//////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
