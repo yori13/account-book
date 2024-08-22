@@ -62,6 +62,7 @@ const CashbookForm = () => {
   };
   // フォームの送信処理
   const handleSubmit = async (e) => {
+    console.log(e.nativeEvent);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -86,18 +87,25 @@ const CashbookForm = () => {
             className="grid sm:grid-cols-3 grid-cols-2 sm:space-x-10 space-x-3 mb-10"
           >
             <div className="sm:ml-10 m-auto ml-3 mb-3">
-              <label htmlFor={`date-${index}`}>日付</label>
+              <label htmlFor={`date-${index}`} className="block sm:inline">
+                日付
+              </label>
               <input
                 type="date"
                 name="date"
                 id={`date-${index}`}
                 value={entry.date}
                 onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-400 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label htmlFor={`select-item-${index}`}>費目</label>
+              <label
+                htmlFor={`select-item-${index}`}
+                className="block sm:inline"
+              >
+                費目
+              </label>
               <select
                 name="itemCode"
                 id={`select-item-${index}`}
@@ -113,56 +121,69 @@ const CashbookForm = () => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor={`memo-${index}`}>摘要</label>
+              <label htmlFor={`memo-${index}`} className="block sm:inline">
+                摘要
+              </label>
               <input
                 type="text"
                 name="memo"
                 id={`memo-${index}`}
                 value={entry.memo}
                 onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-400 rounded-md sm:px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className="m-auto">
-              <input
-                type="radio"
-                name={`priceTypeCode-${index}`}
-                value={1}
-                id={`debit-${index}`}
-                checked={entry.priceTypeCode === 1}
-                onChange={(e) => handleChange(index, e)}
-              />
-              <label htmlFor={`debit-${index}`} className="mr-2">借方</label>
-
-              <input
-                type="radio"
-                name={`priceTypeCode-${index}`}
-                value={2}
-                id={`credit-${index}`}
-                checked={entry.priceTypeCode === 2}
-                onChange={(e) => handleChange(index, e)}
-              />
-              <label htmlFor={`credit-${index}`} className="mr-2">貸方</label>
-
-              <input
-                type="radio"
-                name={`priceTypeCode-${index}`}
-                value={3}
-                id={`brought-forward-${index}`}
-                checked={entry.priceTypeCode === 3}
-                onChange={(e) => handleChange(index, e)}
-              />
-              <label htmlFor={`brought-forward-${index}`}>繰越金額</label>
+            <div className="flex flex-col sm:flex-row">
+              <div className="mr-2 mb-2 sm:mb-0">
+                <input
+                  type="radio"
+                  name={`priceTypeCode-${index}`}
+                  value={1}
+                  id={`debit-${index}`}
+                  checked={entry.priceTypeCode === 1}
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <label htmlFor={`debit-${index}`} className="mr-2">
+                  借方
+                </label>
+              </div>
+              <div className="mr-2 mb-2 sm:mb-0">
+                <input
+                  type="radio"
+                  name={`priceTypeCode-${index}`}
+                  value={2}
+                  id={`credit-${index}`}
+                  checked={entry.priceTypeCode === 2}
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <label htmlFor={`credit-${index}`} className="mr-2">
+                  貸方
+                </label>
+              </div>
+              <div className="mr-2 mb-2 sm:mb-0">
+                <input
+                  type="radio"
+                  name={`priceTypeCode-${index}`}
+                  value={3}
+                  id={`brought-forward-${index}`}
+                  checked={entry.priceTypeCode === 3}
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <label htmlFor={`brought-forward-${index}`}>繰越金額</label>
+              </div>
             </div>
+
             <div className="m-auto">
-              <label htmlFor={`price-${index}`}>金額</label>
+              <label htmlFor={`price-${index}`} className="block sm:inline">
+                金額
+              </label>
               <input
                 type="number"
                 name="price"
                 id={`price-${index}`}
                 value={entry.price}
                 onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-400 rounded-md sm:px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="m-auto">
@@ -195,19 +216,18 @@ const CashbookForm = () => {
             </button>
           </div>
           <div className="flex justify-center grid-cols-2 space-x-3">
-            <div>
-              <input
-                type="submit"
-                value="入力完了"
-                className="border border-gray-300 bg-blue-500 hover:bg-blue-300 text-white py-4 px-6 rounded-3xl font-bold mb-5"
-              />
-            </div>
+            <input
+              type="submit"
+              value="入力完了"
+              className="border border-gray-300 bg-blue-500 hover:bg-blue-300 text-white py-4 px-6 rounded-3xl font-bold mb-5"
+            />
+            <BackButton />
           </div>
         </div>
       </form>
-      <div className="flex justify-center grid-cols-2 space-x-3">
+      {/* <div className="flex justify-center grid-cols-2 space-x-3">
         <BackButton className="border border-gray-300" />
-      </div>
+      </div> */}
     </div>
   );
 };
