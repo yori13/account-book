@@ -7,7 +7,6 @@ const CashbookPage = () =>{
     <div>
       <h1>現金出納帳</h1>
       <CashbookForm/>
-      <BackButton/>
     </div>
   );
 };

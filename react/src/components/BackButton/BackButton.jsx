@@ -8,7 +8,7 @@ const BackButton = () =>{
   }
   return(
     <div>
-      <button onClick={backButton}>戻る</button>
+      <button onClick={backButton} className="border bg-green-800 hover:bg-green-500 text-white py-4 px-10 rounded-3xl font-bold">戻る</button>
     </div>
   );
 }
