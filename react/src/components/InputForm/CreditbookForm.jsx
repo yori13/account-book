@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import BackButton from '../BackButton/BackButton';
+import BackButton from "../BackButton/BackButton";
 
 const CreditbookForm = () => {
   // 入力フォームuseState
@@ -29,13 +29,26 @@ const CreditbookForm = () => {
   return (
     <div>
       <div className="flex justify-center">
-        <form action="" method="post" className="grid grid-cols-2 md:grid-cols-3 gap-5">
+        <form
+          action=""
+          method="post"
+          className="grid grid-cols-2 md:grid-cols-3 gap-5"
+        >
           <div>
-            <label htmlFor="date" className="block md:inline">支払い月</label>
-            <input type="month" name="date" id="date" className="border border-gray-500 rounded"/>
+            <label htmlFor="date" className="block md:inline">
+              支払い月
+            </label>
+            <input
+              type="month"
+              name="date"
+              id="date"
+              className="border border-gray-500 rounded"
+            />
           </div>
           <div>
-            <label htmlFor="gasoline" className="block md:inline">ガソリン代</label>
+            <label htmlFor="gasoline" className="block md:inline">
+              ガソリン代
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -47,7 +60,9 @@ const CreditbookForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="phone" className="block md:inline">携帯代</label>
+            <label htmlFor="phone" className="block md:inline">
+              携帯代
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -59,7 +74,9 @@ const CreditbookForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="uniform" className="block md:inline">作業着代</label>
+            <label htmlFor="uniform" className="block md:inline">
+              作業着代
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -71,7 +88,9 @@ const CreditbookForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="material" className="block md:inline">材料代</label>
+            <label htmlFor="material" className="block md:inline">
+              材料代
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -83,7 +102,9 @@ const CreditbookForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="etc" className="block md:inline">ETC代</label>
+            <label htmlFor="etc" className="block md:inline">
+              ETC代
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -95,7 +116,9 @@ const CreditbookForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="other" className="block md:inline">その他</label>
+            <label htmlFor="other" className="block md:inline">
+              その他
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -107,17 +130,32 @@ const CreditbookForm = () => {
             />
           </div>
           <div className="">
-            <label htmlFor="detail" className="block">その他詳細</label>
-            <textarea name="detail" id="detail" cols="20" rows="5" className="border border-gray-500 rounded"></textarea>
+            <label htmlFor="detail" className="block">
+              その他詳細
+            </label>
+            <textarea
+              name="detail"
+              id="detail"
+              cols="20"
+              rows="5"
+              className="border border-gray-500 rounded"
+            ></textarea>
+          </div>
+
+          <div className="flex justify-end items-center">
+            <button className="bg-blue-500 hover:bg-blue-300 px-6 py-4 rounded-3xl text-white font-bold">
+              入力完了
+            </button>
+          </div>
+          <div className="flex ">
+            <BackButton />
           </div>
         </form>
       </div>
       <div className="grid place-items-center mt-10">
-        <p id="total" className="font-bold">合計：{total} 円</p>
-        <div className="flex space-x-6 mt-10">
-          <button className="bg-blue-500 hover:bg-blue-300 px-4 rounded-3xl text-white font-bold">入力完了</button>
-          <BackButton />
-        </div>
+        <p id="total" className="font-bold">
+          合計：{total} 円
+        </p>
       </div>
     </div>
   );
