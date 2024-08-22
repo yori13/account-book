@@ -1,5 +1,4 @@
 import React from 'react';
-import BackButton from '../BackButton/BackButton';
 import CashbookForm from '../InputForm/CashbookForm';
 
 const CashbookPage = () =>{
