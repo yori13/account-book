@@ -9,7 +9,11 @@ const db = {
   Sequelize,
   cashItem: require('./cashItem')(sequelize, DataTypes),
   cashPriceType: require('./cashPriceType')(sequelize, DataTypes),
-  cashAccount: require('./cashAccount')(sequelize, DataTypes)
+  cashAccount: require('./cashAccount')(sequelize, DataTypes),
+  user:require('./user')(sequelize,DataTypes),
+  creditDetail: require('./creditDetail')(sequelize, DataTypes),
+  creditCategory: require('./creditCategory')(sequelize, DataTypes),
+  creditAccount: require('./creditAccount')(sequelize, DataTypes)
 };
 
 module.exports = db;
