@@ -39,6 +39,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'users',
+          key:'id'
+        }
+      },
     });
   },
 
