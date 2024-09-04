@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) =>{
       type:DataTypes.DATEONLY,
       allowNull: false
     },
+    credit_price:{
+      type:DataTypes.INTEGER,
+      allowNull:false
+    },
     credit_category_code:{
       type:DataTypes.INTEGER,
       allowNull: false,

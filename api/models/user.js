@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) =>{
       primaryKey: true
     },
     user_name:{
-      type: DataTypes.VARCHAR,
+      type: DataTypes.STRING,
       allowNull: false
     },
     password:{
-      type: DataTypes.VARCHAR,
+      type: DataTypes.STRING,
       allowNull:false
     }
   },{

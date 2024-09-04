@@ -14,6 +14,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      credit_price: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       category_code: {
         type: Sequelize.INTEGER,
         allowNull: false,

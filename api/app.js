@@ -11,19 +11,29 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 app.use(cors());
-// 現金出納帳登録 ////
+
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3001;
+
+// 現金出納帳登録 ////
 const cashAccountRouter = require('./routes/cashAccount');
 
 app.use(bodyParser.json()); // JSONのリクエストボディをパースするためのミドルウェア
 
 app.use('/api/cash-account', cashAccountRouter);
+//////////////////
 
-const PORT = process.env.PORT || 3001;
+// クレジット出納帳登録
+const creditAccountRouter = require('./routes/creditAccount');
+app.use(bodyParser.json()); // JSONのリクエストボディをパースするためのミドルウェア
+
+app.use('/api/credit-account', creditAccountRouter);
+///////////////////
+
+// dbへアクセス
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-//////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

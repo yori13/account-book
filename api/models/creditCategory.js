@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) =>{
       primaryKey:true
     },
     category_name:{
-      type:DataTypes.VARCHER,
+      type:DataTypes.STRING,
       allowNull: false
     }
   },{

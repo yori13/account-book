@@ -81,123 +81,123 @@ const CashbookForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {entries.map((entry, index) => (
-          <div
-            key={index}
-            className="grid sm:grid-cols-3 grid-cols-2 sm:space-x-10 space-x-3 mb-10"
-          >
-            <div className="sm:ml-10 m-auto ml-3 mb-3">
-              <label htmlFor={`date-${index}`} className="block sm:inline">
-                日付
-              </label>
-              <input
-                type="date"
-                name="date"
-                id={`date-${index}`}
-                value={entry.date}
-                onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor={`select-item-${index}`}
-                className="block sm:inline"
-              >
-                費目
-              </label>
-              <select
-                name="itemCode"
-                id={`select-item-${index}`}
-                value={entry.itemCode}
-                onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value={0}>選択してください</option>
-                <option value={3}>繰越</option>
-                <option value={1}>消耗品</option>
-                <option value={2}>交通費</option>
-              </select>
-            </div>
+          {entries.map((entry, index) => (
+            <div key={index} className="flex justify-center mb-10">
+              <div className="grid grid-cols-2 sm:space-x-10 space-x-3 space-y-8">
+                <div className="mt-7 ml-3 sm:ml-10">
+                  <label htmlFor={`date-${index}`} className="block sm:inline-flex">
+                    日付
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    id={`date-${index}`}
+                    value={entry.date}
+                    onChange={(e) => handleChange(index, e)}
+                    className="border border-gray-400 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor={`select-item-${index}`}
+                    className="block sm:inline"
+                  >
+                    費目
+                  </label>
+                  <select
+                    name="itemCode"
+                    id={`select-item-${index}`}
+                    value={entry.itemCode}
+                    onChange={(e) => handleChange(index, e)}
+                    className="border border-gray-400 rounded-md sm:px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value={0}>選択してください</option>
+                    <option value={3}>繰越</option>
+                    <option value={1}>消耗品</option>
+                    <option value={2}>交通費</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor={`memo-${index}`} className="block sm:inline">
+                    摘要
+                  </label>
+                  <input
+                    type="text"
+                    name="memo"
+                    id={`memo-${index}`}
+                    value={entry.memo}
+                    onChange={(e) => handleChange(index, e)}
+                    className="border border-gray-400 rounded-md sm:px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row">
+                  <div className="">
+                    <input
+                      type="radio"
+                      name={`priceTypeCode-${index}`}
+                      value={1}
+                      id={`debit-${index}`}
+                      checked={entry.priceTypeCode === 1}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <label htmlFor={`debit-${index}`} className="mr-2">
+                      借方
+                    </label>
+                  </div>
+                  <div className="">
+                    <input
+                      type="radio"
+                      name={`priceTypeCode-${index}`}
+                      value={2}
+                      id={`credit-${index}`}
+                      checked={entry.priceTypeCode === 2}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <label htmlFor={`credit-${index}`} className="mr-2">
+                      貸方
+                    </label>
+                  </div>
+                  <div className="">
+                    <input
+                      type="radio"
+                      name={`priceTypeCode-${index}`}
+                      value={3}
+                      id={`brought-forward-${index}`}
+                      checked={entry.priceTypeCode === 3}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <label htmlFor={`brought-forward-${index}`}>繰越金額</label>
+                  </div>
+                </div>
 
-            <div className="mb-3">
-              <label htmlFor={`memo-${index}`} className="block sm:inline">
-                摘要
-              </label>
-              <input
-                type="text"
-                name="memo"
-                id={`memo-${index}`}
-                value={entry.memo}
-                onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md sm:px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div className="flex flex-col sm:flex-row">
-              <div className="mr-2 mb-2 sm:mb-0">
-                <input
-                  type="radio"
-                  name={`priceTypeCode-${index}`}
-                  value={1}
-                  id={`debit-${index}`}
-                  checked={entry.priceTypeCode === 1}
-                  onChange={(e) => handleChange(index, e)}
-                />
-                <label htmlFor={`debit-${index}`} className="mr-2">
-                  借方
-                </label>
-              </div>
-              <div className="mr-2 mb-2 sm:mb-0">
-                <input
-                  type="radio"
-                  name={`priceTypeCode-${index}`}
-                  value={2}
-                  id={`credit-${index}`}
-                  checked={entry.priceTypeCode === 2}
-                  onChange={(e) => handleChange(index, e)}
-                />
-                <label htmlFor={`credit-${index}`} className="mr-2">
-                  貸方
-                </label>
-              </div>
-              <div className="mr-2 mb-2 sm:mb-0">
-                <input
-                  type="radio"
-                  name={`priceTypeCode-${index}`}
-                  value={3}
-                  id={`brought-forward-${index}`}
-                  checked={entry.priceTypeCode === 3}
-                  onChange={(e) => handleChange(index, e)}
-                />
-                <label htmlFor={`brought-forward-${index}`}>繰越金額</label>
+                <div className="">
+                  <label htmlFor={`price-${index}`} className="block sm:inline">
+                    金額
+                  </label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    name="price"
+                    id={`price-${index}`}
+                    value={entry.price}
+                    onChange={(e) => handleChange(index, e)}
+                    className="border border-gray-400 rounded-md sm:px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="m-auto">
+                  <input
+                    type="checkbox"
+                    name="tax"
+                    id={`tax-${index}`}
+                    checked={entry.tax}
+                    onChange={(e) => handleChange(index, e)}
+                  />
+                  <label htmlFor={`tax-${index}`}>消費税率8%</label>
+                </div>
               </div>
             </div>
+          ))}
 
-            <div className="m-auto">
-              <label htmlFor={`price-${index}`} className="block sm:inline">
-                金額
-              </label>
-              <input
-                type="number"
-                name="price"
-                id={`price-${index}`}
-                value={entry.price}
-                onChange={(e) => handleChange(index, e)}
-                className="border border-gray-400 rounded-md sm:px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div className="m-auto">
-              <input
-                type="checkbox"
-                name="tax"
-                id={`tax-${index}`}
-                checked={entry.tax}
-                onChange={(e) => handleChange(index, e)}
-              />
-              <label htmlFor={`tax-${index}`}>消費税率8%</label>
-            </div>
-          </div>
-        ))}
         <div className="">
           <div className="flex justify-center space-x-10 mb-10">
             <button

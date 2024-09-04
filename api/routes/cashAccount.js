@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { cashAccount } = require('../models'); // モデル名が正しいか確認
+const { cashAccount } = require('../models');
 
 router.post('/', async (req, res) => {
   try {
