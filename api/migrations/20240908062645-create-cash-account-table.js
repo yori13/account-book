@@ -39,11 +39,11 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      user_id: {
+      user_code: {
         type: Sequelize.INTEGER,
         allowNull:false,
         references:{
-          model:'users',
+          model:'user',
           key:'id'
         }
       },

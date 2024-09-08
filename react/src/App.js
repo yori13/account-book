@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TopPage from './components/pages/TopPage'; // TOPページ
 import CashbookPage from './components/pages/CashbookPage'; // 現金出納帳画面
 import CreditbookPage from './components/pages/CreditbookPage'; // クレジット出納帳画面
+import CashConfirmation from './components/pages/CashConfirmation'
 import HeaderCompornent from './components/header/header'; // ヘッダー
 
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<TopPage />} />
           <Route path="/cashbook" element={<CashbookPage />} />
           <Route path="/creditbook" element={<CreditbookPage />} />
+          <Route path='/CashConfirmation' element={<CashConfirmation/>}/>
         </Routes>
       </div>
     </Router>

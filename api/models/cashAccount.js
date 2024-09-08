@@ -35,6 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     tax: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    user_code:{
+      type:DataTypes.INTEGER,
+      references:{
+        model:'users',
+        key:'id'
+      },
+      allowNull: false
     }
   }, {
     tableName: 'cash_account',

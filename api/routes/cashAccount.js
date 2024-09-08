@@ -18,7 +18,8 @@ router.post('/', async (req, res) => {
       memo: entry.memo,
       price_type_code: entry.priceTypeCode,
       price: entry.price,
-      tax: entry.tax
+      tax: entry.tax,
+      user_code: 1
     }));
 
     // データを一括で挿入
