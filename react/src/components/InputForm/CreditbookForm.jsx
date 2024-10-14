@@ -1,16 +1,22 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import BackButton from "../BackButton/BackButton";
+import { updateEntries } from "../../actions/creditActions";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const CreditbookForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   // 入力フォームuseState
-  const [date,setDate] = useState("");
+  const [date, setDate] = useState("");
   const [gasoline, setGasoline] = useState("");
   const [phone, setPhone] = useState("");
   const [uniform, setUniform] = useState("");
   const [material, setMaterial] = useState("");
   const [etc, setEtc] = useState("");
   const [other, setOther] = useState("");
+  const [detail, setDetail] = useState("");
 
   // 合計金額管理useState
   const [total, setTotal] = useState(0);
@@ -28,35 +34,49 @@ const CreditbookForm = () => {
   }, [gasoline, phone, uniform, material, etc, other]);
 
   // フォームの送信
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const entries = {
-      date:date,
-      gasoline: Number(gasoline),
-      phone: Number(phone),
-      uniform: Number(uniform),
-      material: Number(material),
-      etc: Number(etc),
-      other: Number(other),
-      user_id: 1,
-    };
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/api/credit-account",
-        entries
-      );
-      alert("登録しました");
-      console.log("Response:", response.data);
-    } catch (error) {
-      alert("登録に失敗しました");
-      console.error("Error submitting data:", error);
-    }
+  const handleUpdate = () => {
+    // dispatchでエントリーを更新
+    dispatch(
+      updateEntries({
+        date: date,
+        gasoline: Number(gasoline),
+        phone: Number(phone),
+        uniform: Number(uniform),
+        material: Number(material),
+        etc: Number(etc),
+        other: Number(other),
+        detail:String(detail)
+      })
+    );
+    navigate('/CreditConfirmation');
   };
-
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const entries = {
+  //     date:date,
+  //     gasoline: Number(gasoline),
+  //     phone: Number(phone),
+  //     uniform: Number(uniform),
+  //     material: Number(material),
+  //     etc: Number(etc),
+  //     other: Number(other),
+  //     user_id: 1,
+  //   };
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3001/api/credit-account",
+  //       entries
+  //     );
+  //     alert("登録しました");
+  //     console.log("Response:", response.data);
+  //   } catch (error) {
+  //     alert("登録に失敗しました");
+  //     console.error("Error submitting data:", error);
+  //   }
   return (
     <div>
       <div className="flex justify-center">
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
             <div>
               <label htmlFor="date" className="block md:inline">
@@ -163,12 +183,16 @@ const CreditbookForm = () => {
                 id="detail"
                 cols="20"
                 rows="5"
+                onChange={(e) => setDetail(String(e.target.value))}
                 className="border border-gray-500 rounded"
               ></textarea>
             </div>
           </div>
           <div className="flex justify-center items-center mt-10 sm:space-x-20 space-x-5">
-            <button className="bg-blue-500 hover:bg-blue-300 px-6 py-4 rounded-3xl text-white font-bold">
+            <button
+              onClick={handleUpdate}
+              className="bg-blue-500 hover:bg-blue-300 px-6 py-4 rounded-3xl text-white font-bold"
+            >
               入力完了
             </button>
             <BackButton />
