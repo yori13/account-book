@@ -6,13 +6,28 @@ import axios from "axios";
 const CreditConfirmation = () => {
   const store = useSelector((state) => state);
   const formData = store.entries; // entriesが存在しない場合は空の配列を使う
-  console.log(formData);
+  
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/credit-account",
+        formData
+      );
+      console.log("Data submitted successfully:", response);
+      alert("登録しました");
+    } catch (error) {
+      alert("登録に失敗しました");
+      console.log(formData);
+      console.error("Error submitting data:", error);
+    }
+  }
   return (
     <div>
       {/* スマホサイズでの表示 */}
       <div className="mt-5">
-        <form>
-          <div className="sm:flex sm:flex-col w-full px-7 mb-10 justify-center">
+        <form onSubmit={handleSubmit}>
+          <div className="sm:flex sm:flex-col w-full px-12 mb-10 justify-center">
             <div className="block sm:hidden">
               <div className="grid grid-cols-2 border border-black">
                 <div className="border border-black p-2 text-center">
@@ -62,7 +77,7 @@ const CreditConfirmation = () => {
                   {formData.other}
                 </div>
 
-                <div className="border border-black p-2">その他詳細</div>
+                <div className="border border-black p-2 text-center">その他詳細</div>
                 <div className="border border-black p-2 break-words">
                   {formData.detail}
                 </div>
@@ -105,7 +120,7 @@ const CreditConfirmation = () => {
               value="入力完了"
               className="border border-gray-300 bg-blue-500 hover:bg-blue-300 text-white py-4 px-6 rounded-3xl font-bold mb-5"
             />
-            <BackButton></BackButton>
+            <BackButton/>
           </div>
         </form>
       </div>

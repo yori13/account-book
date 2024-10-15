@@ -1,88 +1,100 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); // これでrouterを定義
 const { creditAccount, creditDetail, sequelize } = require('../models');
-const { QueryTypes } = require('sequelize');
 
 router.post('/', async (req, res) => {
+  const t = await sequelize.transaction();
   try {
-    // detailの件数取得
-    detailCount = 0;
-    sequelize.query('SELECT COUNT(*) AS count FROM credit_detail', {
-      type: QueryTypes.SELECT
-    })
-    .then((result) => {
-      detailCount = result[0].count + 1;
-      console.log(detailCount);
-    })
-    .catch((error) => {
-      console.error('error:', error);
-    });
-
     const date = req.body.date;
     const gasoline = req.body.gasoline;
     const phone = req.body.phone;
     const uniform = req.body.uniform;
     const material = req.body.material;
+    const etc = req.body.etc;
     const other = req.body.other;
-    const userCode = req.body.user_id;
+    const detail = req.body.detail;
+    // const userCode = req.body.user_code;
+    const userCode = 1;
+
+    let creditDetailId = null;
+
+    if (other) {
+      const newDetail = await creditDetail.create({
+        detail: detail ? detail : "特になし"
+      }, { transaction: t });
+
+      creditDetailId = newDetail.id;
+    }
 
     const sendData = [];
 
     if(gasoline){
       sendData.push({
-        date:date,
-        credit_price:gasoline,
-        category_code:1,
-        credit_detail_code:0,
-        user_code:userCode
+        date: date,
+        credit_price: gasoline,
+        category_code: 1,
+        category_detail_code: 0,
+        user_code: userCode
       });
     }
 
     if(phone){
       sendData.push({
-        dete:date,
-        credit_price:phone,
-        category_code:2,
-        credit_detail_code:0,
-        user_code:userCode
+        date: date,
+        credit_price: phone,
+        category_code: 2,
+        category_detail_code: 0,
+        user_code: userCode
       });
     }
 
     if(uniform){
       sendData.push({
-        date:date,
-        credit_price:uniform,
-        category_code:3,
-        credit_detail_code:0,
-        user_code:userCode
+        date: date,
+        credit_price: uniform,
+        category_code: 3,
+        category_detail_code: 0,
+        user_code: userCode
       });
     }
+
     if(material){
       sendData.push({
-        date:date,
-        credit_price:material,
-        category_code:4,
-        credit_detail_code:0,
-        user_code:userCode
+        date: date,
+        credit_price: material,
+        category_code: 4,
+        category_detail_code: 0,
+        user_code: userCode
       });
     }
+
+    if(etc){
+      sendData.push({
+        date: date,
+        credit_price: etc,
+        category_code: 5,
+        category_detail_code: 0,
+        user_code: userCode
+      });
+    }
+
     if(other){
       sendData.push({
-        date:date,
-        credit_price:other,
-        category_code:5,
-        credit_detail_code:detailCount,
-        user_code:userCode
+        date: date,
+        credit_price: other,
+        category_code: 6,
+        category_detail_code: creditDetailId,
+        user_code: userCode
       });
     }
-    // creditAccountテーブル一括INSERT
-    await creditAccount.bulkCreate(sendData);
 
-    // credit_detailテーブルに詳細をINSERT
+    await creditAccount.bulkCreate(sendData, { transaction: t });
 
+    await t.commit();
+    res.status(200).send("Data inserted successfully");
 
   } catch (error) {
-    // 詳細なエラーメッセージをログに出力
+    await t.rollback();
     console.error('Error inserting data:', error.message);
     res.status(500).send(`Error inserting data: ${error.message}`);
   }

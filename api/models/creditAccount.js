@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) =>{
       type:DataTypes.INTEGER,
       allowNull:false
     },
-    credit_category_code:{
+    category_code:{
       type:DataTypes.INTEGER,
       allowNull: false,
       references:{
@@ -21,13 +21,9 @@ module.exports = (sequelize, DataTypes) =>{
         key:'id'
       }
     },
-    credit_detail_code:{
+    category_detail_code:{
       type:DataTypes.INTEGER,
-      allowNull: true,
-      references:{
-        model:'credit_detail',
-        key:'id'
-      }
+      allowNull: true
     },
     user_code:{
       type:DataTypes.INTEGER,

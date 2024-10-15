@@ -1,17 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
-  const CashDetail = sequelize.define('CashDetail', {
+  const CreditDetail = sequelize.define('CreditDetail', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    credit_detail: {
+    detail: {
       type: DataTypes.TEXT,
       allowNull: false,
     }
   },{
     tableName:'credit_detail',
-    taimestamps: false
+    timestamps: false
   });
-  return CashDetail; 
+  return CreditDetail; 
 };
