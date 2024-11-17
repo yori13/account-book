@@ -1,69 +1,54 @@
-version: '3'
+version: '3.8'
+
 services:
-  db:
-    image: mysql
-    environment:
-      - MYSQL_ROOT_HOST=${DB_ROOT_HOST}
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
-      - TZ=${TZ}
-    ports:
-      - '3306:3306'
-    volumes:
-      - ./db/conf:/etc/mysql/conf.d/:ro
-      - mysql_data:/var/lib/mysql
-      - ./db/logs:/var/log/mysql
-    networks:
-      backend:
-        ipv4_address: 172.28.1.5
-
-  api:
-    image: node
-    environment:
-      - MYSQL_SERVER=db
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
-      - MYSQL_DATABASE=${DB_NAME}
-      - TZ=${TZ}
-      - CHOKIDAR_USEPOLLING=true
-    tty: true
-    ports:
-      - '3001:3000'
-    volumes:
-      - ./api:/app
-    working_dir: /app
-    command: npm run dev
-    networks:
-      backend:
-        ipv4_address: 172.28.1.10
-    depends_on:
-      - db
-
+  # React frontend service
   react:
-    image: node
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    tty: true
+    build:
+      context: ./react
+      dockerfile: Dockerfile
     ports:
-      - '8080:8080'
+      - "8080:8080" # フロントエンドのポートをマッピング
     volumes:
-      - ./react:/app
-    working_dir: /app
-    command: bash -c 'npm start && npm run build'
+      - ./react:/usr/src/app # ローカルとコンテナ内を同期
+    networks:
+      - backend
+    stdin_open: true
+    tty: true
+
+  # Backend API service
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # バックエンドのポートをマッピング
+    volumes:
+      - ./backend:/usr/src/app # ローカルとコンテナ内を同期
     networks:
       - backend
     depends_on:
-      - api
+      - db
+
+  # MySQL database service
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: accounting_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user_password
+    ports:
+      - "3306:3306" # データベース用のポートをマッピング
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
 
 networks:
   backend:
     driver: bridge
-    name: app_network
-    ipam:
-      config:
-        - subnet: 172.28.1.0/24
 
 volumes:
-  mysql_data:
+  db_data:
+
