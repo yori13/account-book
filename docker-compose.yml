@@ -1,54 +1,55 @@
 version: '3.8'
 
 services:
-  # React frontend service
   react:
     build:
       context: ./react
       dockerfile: Dockerfile
     ports:
-      - "8080:8080" # フロントエンドのポートをマッピング
-    volumes:
-      - ./react:/usr/src/app # ローカルとコンテナ内を同期
+      - "8080:8080"
     networks:
       - backend
-    stdin_open: true
-    tty: true
 
-  # Backend API service
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
     ports:
-      - "3000:3000" # バックエンドのポートをマッピング
-    volumes:
-      - ./backend:/usr/src/app # ローカルとコンテナ内を同期
+      - "3000:3000"
     networks:
       - backend
     depends_on:
       - db
 
-  # MySQL database service
   db:
-    image: mysql:8.0
+    image: mysql:latest
     container_name: mysql_container
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: accounting_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user_password
     ports:
-      - "3306:3306" # データベース用のポートをマッピング
+      - "3306:3306"
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db/data:/var/lib/mysql
     networks:
       - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: accounting
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - "80:80"  # 外部の80番ポートをコンテナ内の80番ポートにマッピング
+    volumes:
+      - ./nginx:/etc/nginx/conf.d  # nginxの設定ファイルをマウント
+    networks:
+      - backend
+    depends_on:
+      - react
+      - api
 
 networks:
   backend:
     driver: bridge
-
-volumes:
-  db_data:
 
