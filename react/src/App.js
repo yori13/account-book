@@ -6,6 +6,7 @@ import CreditbookPage from './components/pages/CreditbookPage'; // クレジッ�
 import CashConfirmation from './components/pages/CashConfirmation'
 import HeaderCompornent from './components/header/header'; // ヘッダー
 import CreditConfirmation from './components/pages/CreditConfirmation';
+import Edit from './components/pages/EditPage';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/creditbook" element={<CreditbookPage />} />
           <Route path='/CashConfirmation' element={<CashConfirmation/>}/>
           <Route path='/CreditConfirmation' element={<CreditConfirmation/>}/>
+          <Route path='/Edit' element={<Edit/>}/>
         </Routes>
       </div>
     </Router>
