@@ -13,7 +13,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <HeaderCompornent />
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/TopPage" element={<TopPage />} />
