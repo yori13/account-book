@@ -16,4 +16,4 @@ logs/
 .env
 
 #DB
-db/*
+./db
