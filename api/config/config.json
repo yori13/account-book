@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "sa",
-    "password": "sa",
-    "database": "account-book-db",
+    "username": "user",
+    "password": "password",
+    "database": "accounting",
     "host": "db",
     "dialect": "mysql"
   }
