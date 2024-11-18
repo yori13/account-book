@@ -14,8 +14,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/TopPage" element={<TopPage />} />
+          <Route path="/" element={<TopPage />} />
           <Route path="/cashbook" element={<CashbookPage />} />
           <Route path="/creditbook" element={<CreditbookPage />} />
           <Route path='/CashConfirmation' element={<CashConfirmation/>}/>
