@@ -6,6 +6,9 @@ const LoginPage = () => {
       <div>
         LoginPage
       </div>
+      <div>
+        div
+      </div>
     </>
   );
 }
