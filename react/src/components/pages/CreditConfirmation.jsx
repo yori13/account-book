@@ -24,8 +24,8 @@ const CreditConfirmation = () => {
     }
   }
   return (
-    <HeaderCompornent>
-      <div>
+    <>
+      <HeaderCompornent/>
         {/* スマホサイズでの表示 */}
         <div className="mt-5">
           <form onSubmit={handleSubmit}>
@@ -126,8 +126,7 @@ const CreditConfirmation = () => {
             </div>
           </form>
         </div>
-      </div>
-    </HeaderCompornent>
+    </>
   );
 };
 

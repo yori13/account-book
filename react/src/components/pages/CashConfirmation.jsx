@@ -29,8 +29,8 @@ const CashConfirmation = () => {
   };
 
   return (
-    <HeaderCompornent>
-      <div>
+    <>
+      <HeaderCompornent />
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-full px-7 mb-10 justify-center">
             <h1>確認画面</h1>
@@ -68,8 +68,7 @@ const CashConfirmation = () => {
             <BackButton />
           </div>
         </form>
-      </div>
-    </HeaderCompornent>
+    </>
   );
 };
 
