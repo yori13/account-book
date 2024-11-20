@@ -16,7 +16,7 @@ const CashConfirmation = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/cash-account",
+        "http://localhost:3000/api/cash-account",
         data
       );
       console.log("Data submitted successfully:", response.data);

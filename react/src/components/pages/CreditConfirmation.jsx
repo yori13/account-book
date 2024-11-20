@@ -12,7 +12,7 @@ const CreditConfirmation = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/credit-account",
+        "http://localhost:3000/api/credit-account",
         formData
       );
       console.log("Data submitted successfully:", response);
