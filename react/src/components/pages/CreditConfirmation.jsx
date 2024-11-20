@@ -11,9 +11,14 @@ const CreditConfirmation = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try {
+      const res = await axios.post(
+        "http://localhost:3000/api/credit-detail",
+        { detail: formData.detail}
+      );
+
       const response = await axios.post(
         "http://localhost:3000/api/credit-account",
-        formData
+        { data: formData }
       );
       console.log("Data submitted successfully:", response);
       alert("登録しました");
@@ -29,6 +34,7 @@ const CreditConfirmation = () => {
         {/* スマホサイズでの表示 */}
         <div className="mt-5">
           <form onSubmit={handleSubmit}>
+            <input type="hidden" name="detail-no" id="detail-no" />
             <div className="sm:flex sm:flex-col w-full px-12 mb-10 justify-center">
               <div className="block sm:hidden">
                 <div className="grid grid-cols-2 border border-black">

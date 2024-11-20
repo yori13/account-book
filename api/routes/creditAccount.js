@@ -3,66 +3,56 @@ const router = express.Router();
 const { creditAccount, creditDetail, sequelize } = require('../models');
 
 router.post('/', async (req, res) => {
+  console.log("クレジット登録処理開始");
   const t = await sequelize.transaction();
   try {
-    const { date, gasoline, phone, uniform, material, etc, other, detail } = req.body;
+    // 最新のcredit_detailを取得
+    const latestDetail = await creditDetail.findOne({
+      order: [['id', 'DESC']],
+      limit: 1
+    });
+
+    const detailId = latestDetail.id; // 最新のcredit_detailのIDを取得
+    // const { date, gasoline, phone, uniform, material, etc, other, detail } = req.body;
     const userCode = 1;  // 仮のユーザーコード
-
-    let creditDetailId = null;
-
-    if (!other) {
-      other = 0;
-    }
-
-    // creditDetailの挿入と即座のコミット
-    try {
-      const newDetail = await creditDetail.create({
-        detail: detail ? detail : "特になし"
-      }, { transaction: t });
-      creditDetailId = newDetail.id;  // creditDetailのIDを取得
-      console.log('test::' + creditDetailId);
-      
-      // creditDetailが挿入されて、IDが確定した時点でコミット
-      await t.commit();
-    } catch (error) {
-      await t.rollback();
-      console.error('Error inserting creditDetail:', error.message);
-      return res.status(500).send(`Error inserting creditDetail: ${error.message}`);
-    }
-
-    // creditDetailが挿入された後、IDを使って次の処理を行う
+    const values = req.body.data;
+    const date = values['date'];
+    
+    // 送信するデータの準備
     const sendData = [];
     const categories = [
-      { value: gasoline, categoryCode: 1 },
-      { value: phone, categoryCode: 2 },
-      { value: uniform, categoryCode: 3 },
-      { value: material, categoryCode: 4 },
-      { value: etc, categoryCode: 5 },
-      { value: other, categoryCode: 6, categoryDetailCode: creditDetailId }
+      { value: values['gasoline'], categoryCode: 1 },
+      { value: values['phone'], categoryCode: 2 },
+      { value: values['uniform'], categoryCode: 3 },
+      { value: values['material'], categoryCode: 4 },
+      { value: values['etc'], categoryCode: 5 },
+      { value: values['other'], categoryCode: 6}
     ];
 
+    console.log(categories);
+    // データが存在する場合に送信データを追加
     categories.forEach(item => {
       if (item.value) {
         sendData.push({
           date: date,
           credit_price: item.value,
           category_code: item.categoryCode,
-          category_detail_code: item.categoryDetailCode || 0,
+          category_detail_code: detailId,
           user_code: userCode
         });
       }
     });
 
+    console.log("送信するデータ:", sendData);
     // creditAccountのbulkCreate
     await creditAccount.bulkCreate(sendData, {
-      transaction: t,
-      attributes: ['date', 'credit_price', 'category_code', 'category_detail_code', 'user_code']
+      transaction: t
     });
 
     // トランザクションをコミット
     await t.commit();
     res.status(200).send("Data inserted successfully");
-
+    console.log("クレジット登録処理完了");
   } catch (error) {
     await t.rollback();
     console.error('Error inserting data:', error.message);
