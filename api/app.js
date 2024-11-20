@@ -30,6 +30,11 @@ const creditAccountRouter = require('./routes/creditAccount'); // 修正: パス
 app.use('/api/credit-account', creditAccountRouter);
 ///////////////////
 
+// 現金出納帳データ取得
+const getCashAccount = require('./routes/getCashAccount');
+app.use('/api/get-cash-account', getCashAccount);
+///////////////////
+
 // dbへアクセス
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
