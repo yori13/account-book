@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
-import creditReducer from '../reducers/CreditReducer';
+import Reducer from '../reducers/Reducer';
 
-const creditStore = createStore(creditReducer);
+const Store = createStore(Reducer);
 
-export default creditStore;
+export default Store;
