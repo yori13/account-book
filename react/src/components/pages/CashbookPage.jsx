@@ -4,12 +4,11 @@ import HeaderCompornent from '../header/header'; // ヘッダー
 
 const CashbookPage = () =>{
   return(
-    <HeaderCompornent>
-      <div>
+    <>
+      <HeaderCompornent />
         <h1>現金出納帳</h1>
-          <CashbookForm/>
-      </div>
-    </HeaderCompornent>
+        <CashbookForm/>
+    </>
   );
 };
 

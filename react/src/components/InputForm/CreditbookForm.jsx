@@ -50,29 +50,7 @@ const CreditbookForm = () => {
     );
     navigate('/CreditConfirmation');
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const entries = {
-  //     date:date,
-  //     gasoline: Number(gasoline),
-  //     phone: Number(phone),
-  //     uniform: Number(uniform),
-  //     material: Number(material),
-  //     etc: Number(etc),
-  //     other: Number(other),
-  //     user_id: 1,
-  //   };
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:3001/api/credit-account",
-  //       entries
-  //     );
-  //     alert("登録しました");
-  //     console.log("Response:", response.data);
-  //   } catch (error) {
-  //     alert("登録に失敗しました");
-  //     console.error("Error submitting data:", error);
-  //   }
+
   return (
     <div>
       <div className="flex justify-center">

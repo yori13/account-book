@@ -68,7 +68,7 @@ const CashbookForm = () => {
   };
   
   return (
-    <div>
+    <>
         {entries.map((entry, index) => (
           <div key={index} className="flex justify-center mb-10">
             <div className="grid grid-cols-2 sm:space-x-10 space-x-3 space-y-8">
@@ -203,7 +203,7 @@ const CashbookForm = () => {
             <BackButton />
           </div>
         </div>
-    </div>
+    </>
   );
 };
 

@@ -16,7 +16,7 @@ const CashConfirmation = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/cash-account",
+        "http://localhost:3000/api/cash-account",
         data
       );
       console.log("Data submitted successfully:", response.data);
@@ -29,8 +29,8 @@ const CashConfirmation = () => {
   };
 
   return (
-    <HeaderCompornent>
-      <div>
+    <>
+      <HeaderCompornent />
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-full px-7 mb-10 justify-center">
             <h1>確認画面</h1>
@@ -68,8 +68,7 @@ const CashConfirmation = () => {
             <BackButton />
           </div>
         </form>
-      </div>
-    </HeaderCompornent>
+    </>
   );
 };
 

@@ -11,23 +11,28 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 app.use(cors());
-
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
 
 // 現金出納帳登録 ////
 const cashAccountRouter = require('./routes/cashAccount');
-
 app.use(bodyParser.json()); // JSONのリクエストボディをパースするためのミドルウェア
-
 app.use('/api/cash-account', cashAccountRouter);
 //////////////////
 
-// クレジット出納帳登録
-const creditAccountRouter = require('./routes/creditAccount');
-app.use(bodyParser.json()); // JSONのリクエストボディをパースするためのミドルウェア
+// クレジットその他詳細登録
+const creditDetailRouter = require('./routes/creditDetail');
+app.use('/api/credit-detail', creditDetailRouter);
+///////////////////
 
+// クレジット出納帳登録
+const creditAccountRouter = require('./routes/creditAccount'); // 修正: パスの修正
 app.use('/api/credit-account', creditAccountRouter);
+///////////////////
+
+// 現金出納帳データ取得
+const getCashAccount = require('./routes/getCashAccount');
+app.use('/api/get-cash-account', getCashAccount);
 ///////////////////
 
 // dbへアクセス
@@ -55,11 +60,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

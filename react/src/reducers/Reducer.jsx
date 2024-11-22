@@ -2,7 +2,7 @@ const initialState = {
   entries: {} // 初期状態の設定
 };
 
-const creditReducer = (state = initialState, action) => {
+const Reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_ENTRIES':
       return {
@@ -14,4 +14,4 @@ const creditReducer = (state = initialState, action) => {
   }
 };
 
-export default creditReducer;
+export default Reducer;

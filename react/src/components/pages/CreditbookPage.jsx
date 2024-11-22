@@ -4,12 +4,11 @@ import HeaderCompornent from '../header/header'; // ヘッダー
 
 const CreditbookPage = () =>{
   return(
-    <HeaderCompornent>
-      <div>
-        <h1>クレジット出納帳</h1>
-        <CreditbookForm/>
-      </div>
-    </HeaderCompornent>
+      <>
+        <HeaderCompornent />
+          <h1>クレジット出納帳</h1>
+          <CreditbookForm/>
+      </>
   );
 }
 
