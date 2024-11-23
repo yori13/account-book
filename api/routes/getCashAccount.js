@@ -4,10 +4,12 @@ const { cashAccount, creditAccount } = require('../models');
 
 router.post('/', async (req,res) => {
   try {
-    const data = await creditAccount.findall(
+    const data = await cashAccount.findall(
       // TODO：条件はおいおい記載する
     );
-    res.send(data);
+    const result = data.map(item => item.get());
+    res.json(result);
+    // res.send(data);
   } catch (error) {
     console.log(error);
   }
