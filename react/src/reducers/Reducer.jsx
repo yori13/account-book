@@ -1,5 +1,6 @@
 const initialState = {
-  entries: {} // 初期状態の設定
+  creditConfirmEntries: {},
+  cashDataEntries: {}
 };
 
 const Reducer = (state = initialState, action) => {
@@ -7,7 +8,12 @@ const Reducer = (state = initialState, action) => {
     case 'UPDATE_ENTRIES':
       return {
         ...state,
-        entries: { ...state.entries, ...action.payload } // 既存のエントリを維持しつつ、更新
+        creditConfirmEntries: { ...state.creditConfirmEntries, ...action.payload } // 既存のエントリを維持しつつ、更新
+      };
+    case 'CASH_DATA':
+      return{
+        ...state,
+        cashDataEntries: action.payload
       };
     default:
       return state;
