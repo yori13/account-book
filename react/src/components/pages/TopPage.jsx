@@ -1,9 +1,20 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeaderCompornent from '../header/header'; // ヘッダー
+import HeaderCompornent from '../header/header';
+import { useSelector, useDispatch } from 'react-redux';
+import CashDataActions from '../../actions/cashDataActions';
 
 const TopPage = () => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const cashDataItems = useSelector((state) => state.items || []);
+
+  useEffect(() => {
+    if(cashDataItems.length === 0){
+      dispatch(CashDataActions());
+    }
+  },[]);
 
   const handleCashbookClick = () => {
     navigate('/cashbook');
