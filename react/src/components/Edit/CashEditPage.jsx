@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
 const CashEditPage = () => {
+  const cashDataItems = useSelector((state) => state.cashDataEntries);
+  const itemsArray = Object.values(cashDataItems);
+
   return (
     <>
       <div className="overflow-x-auto">
@@ -16,6 +20,18 @@ const CashEditPage = () => {
             </tr>
           </thead>
           <tbody>
+            {itemsArray.map((item) => (
+              <tr key={item.id}>
+                <td className="border text-center">{item.date}</td>
+                <td className="border text-center">{item.item_code}</td>
+                <td className="border text-center">{item.memo}</td>
+                <td className="border text-center">{item.price}</td>
+                <td className="border text-center">{item.tax}</td>
+                <td className="border">
+                  <button className="bg-blue-500 hover:bg-blue-300 text-white font-bold rounded py-2 px-4">編集</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

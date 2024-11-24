@@ -1,6 +1,6 @@
 const initialState = {
   creditConfirmEntries: {},
-  cashDataEntries: {}
+  cashDataEntries: []
 };
 
 const Reducer = (state = initialState, action) => {

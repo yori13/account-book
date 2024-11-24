@@ -6,8 +6,8 @@ import CashDataActions from '../../actions/cashDataActions';
 
 const TopPage = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
   const cashDataItems = useSelector((state) => state.items || []);
 
   useEffect(() => {
