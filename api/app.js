@@ -35,6 +35,11 @@ const getCashAccount = require('./routes/getCashAccount');
 app.use('/api/get-cash-account', getCashAccount);
 ///////////////////
 
+// 現金出納帳摘要項目データ取得
+const getCashItem = require('./routes/getCashItem');
+app.use('/api/get-cash-item', getCashItem);
+///////////////////
+
 // dbへアクセス
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

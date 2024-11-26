@@ -1,19 +1,19 @@
 // models/cashPriceType.js
 module.exports = (sequelize, DataTypes) => {
-  const CashPriceType = sequelize.define('CashPriceType', {
+  const CashItem = sequelize.define('CashItem', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    price_type: {
+    item_name: {
       type: DataTypes.TEXT,
       allowNull: false
     }
   }, {
-    tableName: 'cash_price_type',
+    tableName: 'cash_item',
     timestamps: false
   });
 
-  return CashPriceType;
+  return CashItem;
 };

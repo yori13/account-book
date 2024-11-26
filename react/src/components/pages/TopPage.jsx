@@ -3,16 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import HeaderCompornent from '../header/header';
 import { useSelector, useDispatch } from 'react-redux';
 import CashDataActions from '../../actions/cashDataActions';
+import CashItemActions from '../../actions/cashItemActions';
 
 const TopPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cashDataItems = useSelector((state) => state.items || []);
+  const cashData = useSelector((state) => state.items || []);
+  const cashItem = useSelector((state) => state.items || []);
 
   useEffect(() => {
-    if(cashDataItems.length === 0){
+    if(cashData.length === 0){
       dispatch(CashDataActions());
+    }
+    if(cashItem.length === 0){
+      dispatch(CashItemActions());
     }
   },[]);
 

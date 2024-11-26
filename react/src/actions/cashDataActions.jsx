@@ -9,7 +9,7 @@ export const cashData = (entries) => {
         payload: array
       });
     } catch (error) {
-      console.error('データ取得エラー:', error);
+      console.error('cashData取得失敗：', error);
     }
   }
 }

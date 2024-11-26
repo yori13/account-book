@@ -1,11 +1,12 @@
 const initialState = {
   creditConfirmEntries: {},
-  cashDataEntries: []
+  cashDataEntries: [],
+  cashItemEntries: []
 };
 
 const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'UPDATE_ENTRIES':
+    case 'UPDATE_CREDIT_FORM':
       return {
         ...state,
         creditConfirmEntries: { ...state.creditConfirmEntries, ...action.payload } // 既存のエントリを維持しつつ、更新
@@ -15,6 +16,11 @@ const Reducer = (state = initialState, action) => {
         ...state,
         cashDataEntries: action.payload
       };
+    case 'CASH_ITEM':
+      return{
+        ...state,
+        cashItemEntries: action.payload
+      }
     default:
       return state;
   }
