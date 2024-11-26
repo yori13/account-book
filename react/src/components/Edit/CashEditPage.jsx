@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const CashEditPage = () => {
   const cashDataItems = useSelector((state) => state.cashDataEntries);
-  const itemsArray = Object.values(cashDataItems);
-  console.log(itemsArray);
-  
-
+  const itemsArray = useSelector((state) => state.cashItemEntries);
   return (
     <>
       <div className="overflow-x-auto">
@@ -22,10 +19,10 @@ const CashEditPage = () => {
             </tr>
           </thead>
           <tbody>
-            {itemsArray.map((item) => (
+            {cashDataItems.map((item) => (
               <tr key={item.id}>
                 <td className="border text-center">{item.date}</td>
-                <td className="border text-center">{}</td>
+                <td className="border text-center">{itemsArray[item.item_code - 1]['item_name']}</td>
                 <td className="border text-center">{item.memo}</td>
                 <td className="border text-center">{item.price_type_code}</td>
                 <td className="border text-center">{item.price}</td>

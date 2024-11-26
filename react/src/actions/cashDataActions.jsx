@@ -1,4 +1,4 @@
-export const cashData = (entries) => {
+export const cashData = () => {
   return async (dispatch) => {
     try {
       const response = await fetch('http://localhost:3000/api/get-cash-account');

@@ -9,8 +9,8 @@ const TopPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cashData = useSelector((state) => state.items || []);
-  const cashItem = useSelector((state) => state.items || []);
+  const cashData = useSelector((state) => state.cashDataEntries || []);
+  const cashItem = useSelector((state) => state.cashItemEntries || []);
 
   useEffect(() => {
     if(cashData.length === 0){
