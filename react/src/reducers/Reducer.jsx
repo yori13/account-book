@@ -1,7 +1,10 @@
 const initialState = {
   creditConfirmEntries: {},
   cashDataEntries: [],
-  cashItemEntries: []
+  cashItemEntries: [],
+  cashPriceCodeEntries: [],
+  creditDataEntries: [],
+  creditDetailEntries: []
 };
 
 const Reducer = (state = initialState, action) => {
@@ -20,6 +23,21 @@ const Reducer = (state = initialState, action) => {
       return{
         ...state,
         cashItemEntries: action.payload
+      }
+    case 'CASH_PRICE_CODE':
+      return{
+        ...state,
+        cashPriceCodeEntries: action.payload
+      }
+    case 'CREDIT_DATA':
+      return{
+        ...state,
+        creditDataEntries: action.payload
+      }
+    case 'CREDIT_DETAIL':
+      return{
+        ...state,
+        creditDetailEntries: action.payload
       }
     default:
       return state;

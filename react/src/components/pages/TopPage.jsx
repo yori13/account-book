@@ -4,6 +4,9 @@ import HeaderCompornent from '../header/header';
 import { useSelector, useDispatch } from 'react-redux';
 import CashDataActions from '../../actions/cashDataActions';
 import CashItemActions from '../../actions/cashItemActions';
+import CashPriceCodeActions from '../../actions/cashPriceCodeActions';
+import CreditDataActions from '../../actions/creditDataActions';
+import CreditDetailActions from '../../actions/creditDetailActions';
 
 const TopPage = () => {
   const navigate = useNavigate();
@@ -11,6 +14,9 @@ const TopPage = () => {
 
   const cashData = useSelector((state) => state.cashDataEntries || []);
   const cashItem = useSelector((state) => state.cashItemEntries || []);
+  const cashPriceCode = useSelector((state) => state.cashPriceEntries || []);
+  const creditData = useSelector((state) => state.creditDataEntries || []);
+  const creditDetail = useSelector((state) => state.creditDetailEntries || []);
 
   useEffect(() => {
     if(cashData.length === 0){
@@ -19,7 +25,17 @@ const TopPage = () => {
     if(cashItem.length === 0){
       dispatch(CashItemActions());
     }
+    if(cashPriceCode.length === 0){
+      dispatch(CashPriceCodeActions());
+    }
+    if(creditData.length === 0){
+      dispatch(CreditDataActions());
+    }
+    if(creditDetail.length === 0){
+      dispatch(CreditDetailActions());
+    }
   },[]);
+
 
   const handleCashbookClick = () => {
     navigate('/cashbook');

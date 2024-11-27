@@ -40,6 +40,21 @@ const getCashItem = require('./routes/getCashItem');
 app.use('/api/get-cash-item', getCashItem);
 ///////////////////
 
+// 現金出納帳金額項目データ取得
+const getCashPriceType = require('./routes/getCashPriceCode');
+app.use('/api/get-cash-price-code', getCashPriceType);
+///////////////////
+
+// クレジット出納帳データ取得
+const getCreditAccount = require('./routes/getCreditAccount');
+app.use('/api/get-credit-account', getCreditAccount);
+///////////////////
+
+// クレジット出納帳データ取得
+const getCreditDetail = require('./routes/getCreditDetail');
+app.use('/api/get-credit-detail', getCreditDetail);
+///////////////////
+
 // dbへアクセス
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
