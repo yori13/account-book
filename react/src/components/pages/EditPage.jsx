@@ -36,7 +36,9 @@ const EditPage = () => {
                 <CreditEditPage/>
               </div>
             </div>
-            <Backbutton />
+            <div className="mt-5 text-center">
+              <Backbutton />
+            </div>
           </div>
       </>
   );

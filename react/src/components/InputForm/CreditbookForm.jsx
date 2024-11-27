@@ -35,6 +35,7 @@ const CreditbookForm = () => {
 
   // フォームの送信
   const handleUpdate = () => {
+    console.log(date);
     // dispatchでエントリーを更新
     dispatch(
       updateEntries({

@@ -6,8 +6,9 @@ import HeaderCompornent from '../header/header'; // ヘッダー
 
 const CreditConfirmation = () => {
   const store = useSelector((state) => state);
-  const formData = store.entries; // entriesが存在しない場合は空の配列を使う
-  
+  const formData = store.creditConfirmEntries; // entriesが存在しない場合は空の配列を使う
+  console.log(formData);
+
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try {

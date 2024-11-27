@@ -8,7 +8,7 @@ import CreditConfirmation from './components/pages/CreditConfirmation';
 import EditPage from './components/pages/EditPage';
 
 
-function App() {
+const App = () => {
   return (
     <>
       <Router>
