@@ -7,6 +7,7 @@ import CashConfirmation from './components/pages/CashConfirmation'
 import CreditConfirmation from './components/pages/CreditConfirmation';
 import EditPage from './components/pages/EditPage';
 import CashEditInput from './components/Edit/CashEditInput';
+import CreditEditInput from './components/Edit/CreditEditInput';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/CreditConfirmation' element={<CreditConfirmation/>}/>
           <Route path='/Edit' element={<EditPage />}/>
           <Route path='/CashEditInput' element={<CashEditInput />}/>
+          <Route path='/CreditEditInput' element={<CreditEditInput />}/>
         </Routes>
       </Router>
     </>

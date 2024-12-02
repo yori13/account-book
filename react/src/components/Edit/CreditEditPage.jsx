@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const CreditEditPage = () => {
+  const navigate = useNavigate();
   const creditDataItems = useSelector((state) => state.creditDataEntries,[]);
   const creditDetail = useSelector((state) => state.creditDetailEntries,[]);
   const category =[
@@ -19,6 +21,10 @@ const CreditEditPage = () => {
   var num = 0;
   const detailValue = () => {
     return creditDetail[num++]['detail'];
+  }
+  const handleEditPage = (item) => {
+    const sendData = creditDataItems.slice(item, item + 6);
+    navigate("/CreditEditInput",{ state: sendData })
   }
 
   return(
@@ -52,7 +58,7 @@ const CreditEditPage = () => {
                 )}
                 {index % 6 === 0 && (
                   <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
-                    <button className="bg-cyan-500 text-white px-4 py-2 rounded">
+                    <button className="bg-cyan-500 text-white px-4 py-2 rounded" onClick={()=>handleEditPage(index)}>
                       編集
                     </button>
                   </td>

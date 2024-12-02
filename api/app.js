@@ -55,8 +55,15 @@ const getCreditDetail = require('./routes/getCreditDetail');
 app.use('/api/get-credit-detail', getCreditDetail);
 ///////////////////
 
+// 現金出納帳データ更新
 const getCashUpdate = require('./routes/cashUpdate');
 app.use('/api/get-cash-update', getCashUpdate);
+///////////////////
+
+// クレジット出納帳データ更新
+const getCreditUpdate = require('./routes/creditUpdate');
+app.use('/api/get-credit-update', getCreditUpdate);
+///////////////////
 
 // dbへアクセス
 app.listen(PORT, () => {
