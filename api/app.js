@@ -55,6 +55,9 @@ const getCreditDetail = require('./routes/getCreditDetail');
 app.use('/api/get-credit-detail', getCreditDetail);
 ///////////////////
 
+const getCashUpdate = require('./routes/cashUpdate');
+app.use('/api/get-cash-update', getCashUpdate);
+
 // dbへアクセス
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

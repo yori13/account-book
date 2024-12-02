@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BackButton from "../BackButton/BackButton";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import HeaderCompornent from "../header/header";
@@ -8,13 +8,15 @@ import { useForm, Controller } from "react-hook-form";  // React Hook Formをイ
 
 const CashEditInput = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state || {};
   const itemsArray = useSelector((state) => state.cashItemEntries) || [];
   const priceTypeArray = useSelector((state) => state.cashPriceCodeEntries) || [];
-  
+  console.log(state);
   // React Hook Formのセットアップ
   const { control, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
+      id: state.id || "",
       date: state.date || "",
       item_code: state.item_code || "",
       memo: state.memo || "",
@@ -27,8 +29,11 @@ const CashEditInput = () => {
   // サーバーへデータ送信する関数
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost/api/cash-Edit", data);
-      console.log("Data submitted successfully:", response.data);
+      const response = await axios.post(
+        "http://localhost:3000/api/get-cash-update",
+        data
+      );
+      navigate("/");
     } catch (error) {
       console.error("Error submitting data:", error);
     }
@@ -39,6 +44,7 @@ const CashEditInput = () => {
       <HeaderCompornent />
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller name="id" control={control} render={({field}) => <input type="hidden" {...field}/>} />
           <div>
             <div>
               <label htmlFor="date">日付：</label>
