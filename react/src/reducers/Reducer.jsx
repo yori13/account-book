@@ -39,6 +39,16 @@ const Reducer = (state = initialState, action) => {
         ...state,
         creditDetailEntries: action.payload
       }
+    case 'CASH_RESET':
+      return{
+        ...state,
+        cashDataEntries: []
+      }
+    case 'CREDIT_RESET':
+      return{
+        ...state,
+        creditDataEntries: []
+      }
     default:
       return state;
   }
