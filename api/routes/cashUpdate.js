@@ -9,6 +9,7 @@ router.post('/', async(req,res)=>{
       entries,
       { where: { id: entries.id } }
     );
+    res.json();
   }catch(error){
   }
 });

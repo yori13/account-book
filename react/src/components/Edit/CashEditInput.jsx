@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import HeaderCompornent from "../header/header";
 import { useForm, Controller } from "react-hook-form";  // React Hook Formをインポート
+import CashReset from '../../actions/cashResetActions';
 
 const CashEditInput = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const state = location.state || {};
   const itemsArray = useSelector((state) => state.cashItemEntries) || [];
   const priceTypeArray = useSelector((state) => state.cashPriceCodeEntries) || [];
@@ -33,7 +35,14 @@ const CashEditInput = () => {
         "http://localhost:3000/api/get-cash-update",
         data
       );
-      navigate("/");
+      if(response.status === 200){
+        alert('データを更新しました');
+        dispatch(CashReset());
+        navigate('/');
+      }else{
+        alert('データ更新に失敗しました' + response.status);
+        console.log(response.status);
+      }
     } catch (error) {
       console.error("Error submitting data:", error);
     }
