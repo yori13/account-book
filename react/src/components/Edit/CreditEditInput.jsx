@@ -24,21 +24,26 @@ const CreditEditInput = () => {
   const state = location.state;
   console.log(state);
   console.log(location);
+
+
+  const id = state.map((item) => String(item.id));
+
   const formatDate = (dateString) => {
-  const date = new Date(dateString);
+    const date = new Date(dateString);
     return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
   };
+
+  const defaultValues = id.reduce((acc, currentId, index) => {
+    acc[currentId] = state[index].credit_price; // 動的にキーを生成
+    return acc;
+  }, {
+    date: formatDate(state[0].date), // date は固定で設定
+    detail: creditDetail?.[state[0]?.category_detail_code] || "",
+  });
+  console.log(defaultValues);
+
   const { control, handleSubmit, setValue, watch } = useForm({
-    defaultValues:{
-      date: formatDate(state[0].date),
-      gasoline: state[0].credit_price,
-      phone: state[1].credit_price,
-      uniform: state[2].credit_price,
-      material: state[3].credit_price,
-      etc: state[4].credit_price,
-      other: state[5].credit_price,
-      detail: creditDetail?.[state[0]?.category_detail_code] || ""
-    }
+    defaultValues,
   });
 
   const onSubmit = async (data) => {
@@ -49,8 +54,8 @@ const CreditEditInput = () => {
       );
       if(response.status === 200){
         alert('データを更新しました');
-        // dispatch(creditReset());
-        // navigate('/');
+        dispatch(creditReset());
+        navigate('/');
       }else{
         alert('データ更新に失敗しました：' + response.status);
         console.log(response.status);
@@ -78,7 +83,7 @@ const CreditEditInput = () => {
           <div>
             <label htmlFor="gasoline">ガソリン：</label>
             <Controller
-                name="gasoline"
+                name={id[0]}
                 control={control}
                 render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
             />
@@ -86,7 +91,7 @@ const CreditEditInput = () => {
           <div>
             <label htmlFor="phone">携帯代：</label>
             <Controller
-                name="phone"
+                name={id[1]}
                 control={control}
                 render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
             />
@@ -94,7 +99,7 @@ const CreditEditInput = () => {
           <div>
             <label htmlFor="uniform">作業着代：</label>
             <Controller
-                name="uniform"
+                name={id[2]}
                 control={control}
                 render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
             />
@@ -102,7 +107,7 @@ const CreditEditInput = () => {
           <div>
             <label htmlFor="material">材料費：</label>
             <Controller
-                name="material"
+                name={id[3]}
                 control={control}
                 render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
             />
@@ -110,7 +115,7 @@ const CreditEditInput = () => {
           <div>
             <label htmlFor="etc">ETC代：</label>
             <Controller
-                name="etc"
+                name={id[4]}
                 control={control}
                 render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
             />
@@ -118,7 +123,7 @@ const CreditEditInput = () => {
           <div>
             <label htmlFor="other">その他：</label>
             <Controller
-                name="other"
+                name={id[5]}
                 control={control}
                 render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
             />

@@ -43,6 +43,7 @@ const CreditEditPage = () => {
           <tbody>
             {creditDataItems.map((item, index) => (
               <tr key={item.id}>
+                <input type="hidden" name="id" value={item.id} />
                 {index % 6 === 0 && (
                   <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
                   {item.date ? formatDate(item.date) : ""}
