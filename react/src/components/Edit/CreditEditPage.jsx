@@ -30,7 +30,7 @@ const CreditEditPage = () => {
   return(
     <>
       <div className="overflow-x-auto">
-        <table className="table-fixed w-full border-collapse border border-gray-300">
+        <table className="table w-full border-collapse border border-gray-300">
           <thead>
             <tr>
               <th className="border px-4 py-2">支払い月</th>
@@ -58,8 +58,8 @@ const CreditEditPage = () => {
                   </td>
                 )}
                 {index % 6 === 0 && (
-                  <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
-                    <button className="bg-cyan-500 text-white px-4 py-2 rounded" onClick={()=>handleEditPage(index)}>
+                  <td rowSpan="6" className="border py-2 text-center align-middle">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded font-bold" onClick={()=>handleEditPage(index)}>
                       編集
                     </button>
                   </td>

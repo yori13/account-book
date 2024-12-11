@@ -67,74 +67,74 @@ const CreditEditInput = () => {
   }
   return(
     <>
-    <HeaderCompornent/>
-    <div>クレジット編集画面</div>
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <div>
-            <label htmlFor="date">期間：</label>
-            <Controller
-                name="date"
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} readOnly />}
-            />
+      <HeaderCompornent/>
+      <div className="text-center mb-5 mt-5 text-xl font-bold">クレジット編集画面</div>
+      <div className="text-center">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="inline-block text-left space-y-4">
+            <div className="flex items-center">
+              <label htmlFor="date" className="w-24 text-right mr-4">期間：</label>
+              <Controller
+                  name="date"
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} readOnly />}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="gasoline" className="w-24 text-right mr-4">ガソリン：</label>
+              <Controller
+                  name={id[0]}
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="phone" className="w-24 text-right mr-4">携帯代：</label>
+              <Controller
+                  name={id[1]}
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="uniform" className="w-24 text-right mr-4">作業着代：</label>
+              <Controller
+                  name={id[2]}
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="material" className="w-24 text-right mr-4">材料費：</label>
+              <Controller
+                  name={id[3]}
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="etc" className="w-24 text-right mr-4">ETC代：</label>
+              <Controller
+                  name={id[4]}
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="other" className="w-24 text-right mr-4">その他：</label>
+              <Controller
+                  name={id[5]}
+                  control={control}
+                  render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="gasoline">ガソリン：</label>
-            <Controller
-                name={id[0]}
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
-            />
+          <div className="mt-6 flex justify-center space-x-10">
+            <input type="submit" value="更新" className="border border-gray-300 bg-blue-500 hover:bg-blue-300 text-white py-4 px-6 rounded-3xl font-bold w-28" />
+            <BackButton/>
           </div>
-          <div>
-            <label htmlFor="phone">携帯代：</label>
-            <Controller
-                name={id[1]}
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
-            />
-          </div>
-          <div>
-            <label htmlFor="uniform">作業着代：</label>
-            <Controller
-                name={id[2]}
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
-            />
-          </div>
-          <div>
-            <label htmlFor="material">材料費：</label>
-            <Controller
-                name={id[3]}
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
-            />
-          </div>
-          <div>
-            <label htmlFor="etc">ETC代：</label>
-            <Controller
-                name={id[4]}
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
-            />
-          </div>
-          <div>
-            <label htmlFor="other">その他：</label>
-            <Controller
-                name={id[5]}
-                control={control}
-                render={({ field }) => <input type="text" className="border border-brack h-10 w-44" {...field} />}
-            />
-          </div>
-        </div>
-        <div>
-        <input type="submit" value="更新" className="border border-gray-300 bg-blue-500 hover:bg-blue-300 text-white py-4 px-6 rounded-3xl font-bold w-28" />
-          <BackButton/>
+        </form>
       </div>
-      </form>
-    </div>
     </>
   );
 }
