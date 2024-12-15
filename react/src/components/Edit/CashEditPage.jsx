@@ -1,10 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const CashEditPage = () => {
+  const navigate = useNavigate();
   const cashDataItems = useSelector((state) => state.cashDataEntries);
   const itemsArray = useSelector((state) => state.cashItemEntries);
   const priceTypeArray = useSelector((state) => state.cashPriceCodeEntries);
+  const handleEditPage = (item) => {
+    navigate("/CashEditInput", { state: item });
+  }
   return (
     <>
       <div className="overflow-x-auto">
@@ -30,7 +35,7 @@ const CashEditPage = () => {
                 <td className="border text-center">{item.price}</td>
                 <td className="border text-center">{item.tax ? '8%' : '10%'}</td>
                 <td className="border">
-                  <button className="bg-blue-500 hover:bg-blue-300 text-white font-bold rounded py-2 px-4">編集</button>
+                  <button className="bg-blue-500 hover:bg-blue-300 text-white font-bold rounded py-2 px-4" onClick={()=>handleEditPage(item)}>編集</button>
                 </td>
               </tr>
             ))}
