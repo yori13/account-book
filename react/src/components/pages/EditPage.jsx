@@ -3,6 +3,7 @@ import HeaderCompornent from '../header/header'; // ヘッダー
 import CashEditPage from '../Edit/CashEditPage';
 import CreditEditPage from '../Edit/CreditEditPage';
 import Backbutton from '../BackButton/BackButton';
+import Title from "../contexts/title";
 
 const EditPage = () => {
   const [tabState, setTabState] = useState("cash");
@@ -11,13 +12,12 @@ const EditPage = () => {
     setTabState(el);
   }
   
+  const title = "編集画面";
   return (
       <>
         <HeaderCompornent />
           <div>
-            <div className="mb-5">
-              <h1>編集</h1>
-            </div>
+            <Title title={title}/>
             <div className="border">
               <div>
                 <ul className="grid grid-cols-2">

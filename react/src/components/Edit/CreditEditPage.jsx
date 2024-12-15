@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const CreditEditPage = () => {
+  const navigate = useNavigate();
   const creditDataItems = useSelector((state) => state.creditDataEntries,[]);
   const creditDetail = useSelector((state) => state.creditDetailEntries,[]);
   const category =[
@@ -20,11 +22,15 @@ const CreditEditPage = () => {
   const detailValue = () => {
     return creditDetail[num++]['detail'];
   }
+  const handleEditPage = (item) => {
+    const sendData = creditDataItems.slice(item, item + 6);
+    navigate("/CreditEditInput",{ state: sendData })
+  }
 
   return(
     <>
-      <div className="overflow-x-auto">
-        <table className="table-fixed w-full border-collapse border border-gray-300">
+      <div className="">
+        <table className="table-flex w-full border-collapse border border-gray-300">
           <thead>
             <tr>
               <th className="border px-4 py-2">支払い月</th>
@@ -37,6 +43,7 @@ const CreditEditPage = () => {
           <tbody>
             {creditDataItems.map((item, index) => (
               <tr key={item.id}>
+                <input type="hidden" name="id" value={item.id} />
                 {index % 6 === 0 && (
                   <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
                   {item.date ? formatDate(item.date) : ""}
@@ -51,8 +58,8 @@ const CreditEditPage = () => {
                   </td>
                 )}
                 {index % 6 === 0 && (
-                  <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
-                    <button className="bg-cyan-500 text-white px-4 py-2 rounded">
+                  <td rowSpan="6" className="border py-2 text-center align-middle">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded font-bold" onClick={()=>handleEditPage(index)}>
                       編集
                     </button>
                   </td>
