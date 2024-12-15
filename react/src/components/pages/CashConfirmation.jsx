@@ -3,12 +3,13 @@ import { useLocation } from "react-router-dom";
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";
 import HeaderCompornent from '../header/header'; // ヘッダー
+import Title from "../contexts/title";
 
 const CashConfirmation = () => {
   // データ受け取り
   const location = useLocation();
   const { data } = location.state || {};
-  console.log(data);
+  const title = "確認画面";
 
   // フォームの送信処理
   const handleSubmit = async (e) => {
@@ -33,7 +34,7 @@ const CashConfirmation = () => {
       <HeaderCompornent />
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-full px-7 mb-10 justify-center">
-            <h1>確認画面</h1>
+          <Title title = {title} />
             <table className="table-fixed border border-black text-center">
               <thead>
                 <tr className="border border-black">

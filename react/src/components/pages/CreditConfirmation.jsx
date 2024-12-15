@@ -2,12 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";
-import HeaderCompornent from '../header/header'; // ヘッダー
+import HeaderCompornent from '../header/header';
+import Title from "../contexts/title";
 
 const CreditConfirmation = () => {
   const store = useSelector((state) => state);
   const formData = store.creditConfirmEntries; // entriesが存在しない場合は空の配列を使う
   console.log(formData);
+  const title = "確認画面";
 
   const handleSubmit = async(e)=>{
     e.preventDefault();
@@ -32,6 +34,7 @@ const CreditConfirmation = () => {
   return (
     <>
       <HeaderCompornent/>
+      <Title title={title}/>
         {/* スマホサイズでの表示 */}
         <div className="mt-5">
           <form onSubmit={handleSubmit}>

@@ -29,8 +29,8 @@ const CreditEditPage = () => {
 
   return(
     <>
-      <div className="overflow-x-auto">
-        <table className="table w-full border-collapse border border-gray-300">
+      <div className="">
+        <table className="table-flex w-full border-collapse border border-gray-300">
           <thead>
             <tr>
               <th className="border px-4 py-2">支払い月</th>
