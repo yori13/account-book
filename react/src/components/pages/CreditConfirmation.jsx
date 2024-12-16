@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";
 import HeaderCompornent from '../header/header';
-import Title from "../contexts/title";
+import Title from "../context/title";
 
 const CreditConfirmation = () => {
   const store = useSelector((state) => state);
