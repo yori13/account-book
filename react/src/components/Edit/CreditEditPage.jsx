@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const CreditEditPage = () => {
   const navigate = useNavigate();
-  const creditDataItems = useSelector((state) => state.creditDataEntries,[]);
-  const creditDetail = useSelector((state) => state.creditDetailEntries,[]);
-  const category =[
+  const creditDataItems = useSelector((state) => state.creditDataEntries, []);
+  const creditDetail = useSelector((state) => state.creditDetailEntries, []);
+  const category = [
     "ガソリン",
     "携帯代",
     "作業着代",
@@ -14,22 +14,20 @@ const CreditEditPage = () => {
     "ETC代",
     "その他"
   ];
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
   };
-  var num = 0;
-  const detailValue = () => {
-    return creditDetail[num++]['detail'];
-  }
-  const handleEditPage = (item) => {
-    const sendData = creditDataItems.slice(item, item + 6);
-    navigate("/CreditEditInput",{ state: sendData })
-  }
 
-  return(
+  const handleEditPage = (itemIndex) => {
+    const sendData = creditDataItems.slice(itemIndex, itemIndex + 6);
+    navigate("/CreditEditInput", { state: sendData });
+  };
+
+  return (
     <>
-      <div className="">
+      <div>
         <table className="table-flex w-full border-collapse border border-gray-300">
           <thead>
             <tr>
@@ -42,35 +40,41 @@ const CreditEditPage = () => {
           </thead>
           <tbody>
             {creditDataItems.map((item, index) => (
-              <tr key={item.id}>
-                <input type="hidden" name="id" value={item.id} />
+              <React.Fragment key={item.id}>
+                {/* 支払い月 */}
                 {index % 6 === 0 && (
-                  <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
-                  {item.date ? formatDate(item.date) : ""}
-                  </td>
-
+                  <tr>
+                    <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
+                      {item.date ? formatDate(item.date) : ""}
+                    </td>
+                    <td className="border px-4 py-2">{category[item.category_code - 1]}</td>
+                    <td className="border px-4 py-2">{item.credit_price}</td>
+                    <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
+                      {creditDetail[item.category_detail_code-1]?.detail || ""}
+                    </td>
+                    <td rowSpan="6" className="border py-2 text-center align-middle">
+                      <button
+                        className="bg-blue-500 text-white px-4 py-2 rounded font-bold"
+                        onClick={() => handleEditPage(index)}
+                      >
+                        編集
+                      </button>
+                    </td>
+                  </tr>
                 )}
-                <td className="border px-4 py-2">{category[item.category_code - 1]}</td>
-                <td className="border px-4 py-2">{item.credit_price}</td>
-                {index % 6 === 0 && (
-                  <td rowSpan="6" className="border px-4 py-2 text-center align-middle">
-                    {detailValue()}
-                  </td>
+                {index % 6 !== 0 && (
+                  <tr>
+                    <td className="border px-4 py-2">{category[item.category_code - 1]}</td>
+                    <td className="border px-4 py-2">{item.credit_price}</td>
+                  </tr>
                 )}
-                {index % 6 === 0 && (
-                  <td rowSpan="6" className="border py-2 text-center align-middle">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded font-bold" onClick={()=>handleEditPage(index)}>
-                      編集
-                    </button>
-                  </td>
-                )}
-              </tr>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
       </div>
     </>
   );
-}
+};
 
 export default CreditEditPage;
