@@ -7,6 +7,7 @@ import HeaderCompornent from "../header/header";
 import { useForm, Controller } from "react-hook-form";  // React Hook Formをインポート
 import CashReset from '../../actions/cashResetActions';
 
+
 const CashEditInput = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const CashEditInput = () => {
       if(response.status === 200){
         alert('データを更新しました');
         dispatch(CashReset());
-        navigate('/');
+        navigate('/top');
       }else{
         alert('データ更新に失敗しました：' + response.status);
         console.log(response.status);

@@ -3,7 +3,7 @@ import HeaderCompornent from '../header/header'; // ヘッダー
 import CashEditPage from '../Edit/CashEditPage';
 import CreditEditPage from '../Edit/CreditEditPage';
 import Backbutton from '../BackButton/BackButton';
-import Title from "../context/title";
+import Title from "../contexts/title";
 
 const EditPage = () => {
   const [tabState, setTabState] = useState("cash");

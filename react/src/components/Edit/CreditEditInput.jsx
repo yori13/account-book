@@ -22,10 +22,6 @@ const CreditEditInput = () => {
     "その他"
   ];
   const state = location.state;
-  console.log(state);
-  console.log(location);
-
-
   const id = state.map((item) => String(item.id));
 
   const formatDate = (dateString) => {
@@ -34,17 +30,17 @@ const CreditEditInput = () => {
   };
 
   const defaultValues = id.reduce((acc, currentId, index) => {
-    acc[currentId] = state[index].credit_price; // 動的にキーを生成
+    acc[currentId] = state[index].credit_price;
     return acc;
   }, {
-    date: formatDate(state[0].date), // date は固定で設定
+    date: formatDate(state[0].date),
     detail: creditDetail?.[state[0]?.category_detail_code] || "",
   });
-  console.log(defaultValues);
 
   const { control, handleSubmit, setValue, watch } = useForm({
     defaultValues,
   });
+  console.log(id);
 
   const onSubmit = async (data) => {
     try {
@@ -55,7 +51,7 @@ const CreditEditInput = () => {
       if(response.status === 200){
         alert('データを更新しました');
         dispatch(creditReset());
-        navigate('/');
+        navigate('/top');
       }else{
         alert('データ更新に失敗しました：' + response.status);
         console.log(response.status);

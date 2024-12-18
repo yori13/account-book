@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";
 import HeaderCompornent from '../header/header'; // ヘッダー
-import Title from "../context/title";
+import Title from "../contexts/title";
 
 const CashConfirmation = () => {
   // データ受け取り
