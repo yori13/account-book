@@ -11,12 +11,18 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 app.use(cors());
-const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
+
+// JSONボディをパースするミドルウェア
+app.use(express.json());  // express.json()を使用
+
+// ログイン ////
+const authLoginRouter = require('./routes/authLogin');
+app.use('/api/authLogin', authLoginRouter);
+//////////////////
 
 // 現金出納帳登録 ////
 const cashAccountRouter = require('./routes/cashAccount');
-app.use(bodyParser.json()); // JSONのリクエストボディをパースするためのミドルウェア
 app.use('/api/cash-account', cashAccountRouter);
 //////////////////
 
@@ -75,7 +81,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
