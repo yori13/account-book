@@ -1,15 +1,52 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 
 
 const Login = () => {
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
-
-  const onSubmit = () => {
-    navigate("/top");
+  const [userInfo, setUserInfo] = useState({id: "", password: ""});
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value
+    });
   }
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const encryptedUserInfo = {
+      id: undefined,
+      password: undefined
+    };
+    
+    const userKey = process.env.REACT_APP_USER;
+    const passKey = process.env.REACT_APP_PASSWORD;
+    
+    // 暗号化された情報をBase64文字列に変換
+    encryptedUserInfo.id = CryptoJS.AES.encrypt(userInfo.id, userKey).toString();
+    encryptedUserInfo.password = CryptoJS.AES.encrypt(userInfo.password, passKey).toString();
+
+    const url = process.env.REACT_APP_API_ENDPOINT + "authLogin";
+    
+    try {
+      const response = await axios.post(url, encryptedUserInfo);
+      if (response.status === 200) {
+        navigate("/top");
+      } else {
+        alert(response.message);
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error during authentication:", error);
+    }
+  };
+  
+  
   return(
     <>
       <div className="h-screen flex flex-col justify-center items-center">
@@ -23,10 +60,10 @@ const Login = () => {
           </div>
           <form className="space-y-6 text-center mt-8" onSubmit={onSubmit}>
             <div className="">
-              <input type="text" placeholder="ID" className="border rounded-sm h-10 w-56" />
+              <input type="text" placeholder="ID" name="id" className="border rounded-sm h-10 w-56" onChange={handleChange} />
             </div>
             <div className="">
-              <input type="password" placeholder="パスワード" className="border rounded-sm h-10 w-56" />
+              <input type="password" placeholder="パスワード" name="password" className="border rounded-sm h-10 w-56" onChange={handleChange} />
             </div>
             <div className="">
               <input type="submit" className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2" value={"ログイン"} />
