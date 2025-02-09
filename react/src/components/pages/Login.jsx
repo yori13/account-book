@@ -27,19 +27,8 @@ const Login = () => {
           <div className={`bg-red-200 ${isError ? "" : "hidden"}`} id="errorMsg">
             <p className="text-red-500 rounded text-center"> IDかパスワードが違います</p>
           </div>
-          <form className="space-y-6 text-center mt-8">
-            <div>
-              <input type="text" placeholder="ID" className="border rounded-sm h-10 w-56" />
-            </div>
-            <div>
-              <input type="password" placeholder="パスワード" className="border rounded-sm h-10 w-56" />
-            </div>
-            <div>
-              <input type="submit" className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2" value={"ログイン"} />
-            </div>
-          </form>
-          <div>
-            <input type="button" value={"Googleアカウントでログイン"} onClick={handleGoogleLogin} />
+          <div className="text-center">
+            <input type="button" value={"Googleアカウントでログイン"} onClick={handleGoogleLogin} className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 mt-24"/>
           </div>
         </div>
       </div>
