@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, provider, signInWithPopup } from "../../authLogin/firebase";
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
+  const compoNentName = "現金出納帳"
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
 
@@ -18,6 +20,9 @@ const Login = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{compoNentName}</title>
+      </Helmet>
       <div className="h-screen flex flex-col justify-center items-center">
         <div>
           <h1 className="text-3xl font-bold">現金出納帳</h1>
