@@ -1,13 +1,13 @@
 import React from 'react';
 import CashbookForm from '../InputForm/CashbookForm';
-import HeaderCompornent from '../header/header'; // ヘッダー
+import HeaderComponent from '../header/header'; // ヘッダー
 import Title from '../contexts/title';
 
 const CashbookPage = () =>{
   const title = "現金出納帳";
   return(
     <>
-      <HeaderCompornent />
+      <HeaderComponent />
         <Title title = {title} />
         <CashbookForm/>
     </>

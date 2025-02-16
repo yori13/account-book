@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";
 import HeaderCompornent from '../header/header'; // ヘッダー
