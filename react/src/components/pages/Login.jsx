@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter as useNavigate } from "react-router-dom";
 import { auth, provider, signInWithPopup } from "../../authLogin/firebase";
 import { Helmet } from 'react-helmet-async';
 
