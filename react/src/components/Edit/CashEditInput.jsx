@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BackButton from "../BackButton/BackButton";
-import { BrowserRouter as useLocation,useNavigate } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import HeaderCompornent from "../header/header";

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TopPage from './components/pages/TopPage';
 import CashbookPage from './components/pages/CashbookPage';
 import CreditbookPage from './components/pages/CreditbookPage';
@@ -15,7 +15,7 @@ import { HelmetProvider } from 'react-helmet-async';
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
+      <BrowserRouter>
         <HelmetProvider>
           <Routes>
             <Route path="/" element={<Login />} />
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/credit-edit-input" element={<PrivateRoute><CreditEditInput /></PrivateRoute>} />
           </Routes>
         </HelmetProvider>
-      </Router>
+      </BrowserRouter>
     </AuthProvider>
   );
 };
