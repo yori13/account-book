@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";  // 正しいインポート
 import { auth, provider, signInWithPopup } from "../../authLogin/firebase";
 import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
-  const compoNentName = "現金出納帳"
-  const navigate = useNavigate();
+  const compoNentName = "現金出納帳";
+  const navigate = useNavigate(); // useNavigateフックの使用
   const [isError, setIsError] = useState(false);
 
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
-      navigate("/top");
+      navigate("/top");  // ログイン成功後にリダイレクト
     } catch (error) {
       setIsError(true);
       console.error(error.message);
@@ -33,7 +33,12 @@ const Login = () => {
             <p className="text-red-500 rounded text-center"> IDかパスワードが違います</p>
           </div>
           <div className="text-center">
-            <input type="button" value={"Googleアカウントでログイン"} onClick={handleGoogleLogin} className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 mt-24"/>
+            <input 
+              type="button" 
+              value={"Googleアカウントでログイン"} 
+              onClick={handleGoogleLogin} 
+              className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 mt-24"
+            />
           </div>
         </div>
       </div>

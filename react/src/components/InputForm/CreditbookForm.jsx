@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BackButton from "../BackButton/BackButton";
 import { updateEntries } from "../../actions/creditActions";
 import { useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter as useNavigate } from "react-router-dom";
 
 const CreditbookForm = () => {
   const dispatch = useDispatch();

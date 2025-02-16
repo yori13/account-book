@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BackButton from "../BackButton/BackButton";
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter as useNavigate } from "react-router-dom";
 
 const CashbookForm = () => {
   // 初期のフォームデータセットを空の配列で初期化
