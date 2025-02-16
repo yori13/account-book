@@ -15,8 +15,8 @@ import { HelmetProvider } from 'react-helmet-async';
 const App = () => {
   return (
     <AuthProvider>
-      <HelmetProvider>
-        <Router>
+      <Router>
+        <HelmetProvider>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/top" element={<PrivateRoute><TopPage /></PrivateRoute>} />
@@ -28,13 +28,12 @@ const App = () => {
             <Route path="/cash-edit-input" element={<PrivateRoute><CashEditInput /></PrivateRoute>} />
             <Route path="/credit-edit-input" element={<PrivateRoute><CreditEditInput /></PrivateRoute>} />
           </Routes>
-        </Router>
-      </HelmetProvider>
+        </HelmetProvider>
+      </Router>
     </AuthProvider>
   );
 };
 
-// Loginページへのリダイレクト処理
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
 

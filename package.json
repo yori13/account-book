@@ -2,7 +2,13 @@
   "dependencies": {
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "firebase": "^11.3.1",
+    "react-hook-form": "^7.54.2",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.5",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
