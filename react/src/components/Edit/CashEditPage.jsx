@@ -8,7 +8,7 @@ const CashEditPage = () => {
   const itemsArray = useSelector((state) => state.cashItemEntries);
   const priceTypeArray = useSelector((state) => state.cashPriceCodeEntries);
   const handleEditPage = (item) => {
-    navigate("/CashEditInput", { state: item });
+    navigate("/cash-edit-input", { state: item });
   }
   return (
     <>

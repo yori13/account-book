@@ -67,7 +67,7 @@ const CashbookForm = () => {
     const navigate = useNavigate();
 
     const handleConfirmation = () => {
-        navigate("/CashConfirmation", { state: { data: entries } });
+      navigate("/cash-confirmation", { state: { data: entries } });
     };
 
     return (

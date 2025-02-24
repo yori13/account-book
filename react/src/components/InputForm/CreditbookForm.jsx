@@ -49,7 +49,7 @@ const CreditbookForm = () => {
         detail:String(detail)
       })
     );
-    navigate('/CreditConfirmation');
+    navigate('/credit-confirmation');
   };
 
   return (
