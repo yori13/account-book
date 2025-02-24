@@ -22,7 +22,7 @@ const CreditEditPage = () => {
 
   const handleEditPage = (itemIndex) => {
     const sendData = creditDataItems.slice(itemIndex, itemIndex + 6);
-    navigate("/CreditEditInput", { state: sendData });
+    navigate("/credit-edit-input", { state: sendData });
   };
 
   return (
