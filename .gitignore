@@ -18,4 +18,5 @@ logs/
 #DB
 db/
 
+#expressのconfig.json
 api/config/config.json
