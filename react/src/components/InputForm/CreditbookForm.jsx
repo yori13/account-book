@@ -167,21 +167,21 @@ const CreditbookForm = () => {
               ></textarea>
             </div>
           </div>
-          <div className="flex justify-center items-center mt-10 sm:space-x-20 space-x-5">
-            <button
-              onClick={handleUpdate}
-              className="bg-blue-500 hover:bg-blue-300 px-6 py-4 rounded-3xl text-white font-bold"
-            >
-              入力完了
-            </button>
-            <BackButton />
-          </div>
         </form>
       </div>
       <div className="grid place-items-center mt-10">
         <p id="total" className="font-bold">
           合計：{total} 円
         </p>
+      </div>
+      <div className="flex justify-center items-center mt-10 sm:space-x-20 space-x-5">
+        <button
+          onClick={handleUpdate}
+          className="bg-blue-500 hover:bg-blue-300 px-6 py-4 rounded-3xl text-white font-bold"
+        >
+          入力完了
+        </button>
+        <BackButton />
       </div>
     </div>
   );

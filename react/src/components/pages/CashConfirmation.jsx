@@ -13,7 +13,6 @@ const CashConfirmation = () => {
 
   // フォームの送信処理
   const handleSubmit = async (e) => {
-    console.log(e.nativeEvent);
     e.preventDefault();
     try {
       const response = await axios.post(
