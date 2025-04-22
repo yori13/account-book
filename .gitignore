@@ -17,3 +17,5 @@ logs/
 
 #DB
 db/
+
+api/config/config.json
