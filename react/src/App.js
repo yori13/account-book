@@ -9,6 +9,7 @@ import EditPage from './components/pages/EditPage';
 import CashEditInput from './components/Edit/CashEditInput';
 import CreditEditInput from './components/Edit/CreditEditInput';
 import Login from './components/pages/Login';
+import MakeUser from './components/pages/MakeUser';
 import { AuthProvider, useAuth } from './authLogin/AuthProvider';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/edit" element={<PrivateRoute><EditPage /></PrivateRoute>} />
             <Route path="/cash-edit-input" element={<PrivateRoute><CashEditInput /></PrivateRoute>} />
             <Route path="/credit-edit-input" element={<PrivateRoute><CreditEditInput /></PrivateRoute>} />
+            <Route path="/make-user" element={<MakeUser />}/>
           </Routes>
         </HelmetProvider>
       </BrowserRouter>
