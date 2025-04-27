@@ -21,6 +21,16 @@ const authLoginRouter = require('./routes/authLogin');
 app.use('/api/authLogin', authLoginRouter);
 //////////////////
 
+// 新規ユーザー登録 ////
+const makeUsersRouter = require('./routes/webauthn/makeUsers');
+app.use('/api/makeUsers', makeUsersRouter);
+//////////////////
+
+// webauthnチャレンジレスポンス ////
+const challengeRouter = require('./routes/webauthn/generateChallenge');
+app.use('/api/webauthn/challenge', challengeRouter);
+//////////////////
+
 // 現金出納帳登録 ////
 const cashAccountRouter = require('./routes/cashAccount');
 app.use('/api/cash-account', cashAccountRouter);

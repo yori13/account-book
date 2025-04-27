@@ -1,5 +1,5 @@
 # Node.jsイメージをベースにバックエンドを設定
-FROM node:16
+FROM node:18
 
 WORKDIR /usr/src/app
 

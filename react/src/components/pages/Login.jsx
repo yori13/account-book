@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  // 正しいインポート
-import { auth, provider, signInWithPopup } from "../../authLogin/firebase";
+import { useNavigate } from "react-router-dom";
+import { auth, provider } from "../../authLogin/firebase";
+import { signInWithPopup } from 'firebase/auth';
+
 import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
