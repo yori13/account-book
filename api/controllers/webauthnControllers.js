@@ -13,9 +13,6 @@ exports.createUser = async (userName, email, transaction) => {
       email: email
     }, { transaction });
 
-    console.log(newUserData.id);
-
-
     if (!newUserData) {
       return { status: 500, message: 'ユーザー作成に失敗しました。' };
     } else {

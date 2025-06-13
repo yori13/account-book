@@ -31,8 +31,6 @@ const  MakeUser = () => {
       //仮ユーザーIDを発行
       const uuid = uuidv4();
 
-      console.log(uuid);
-
       const { data: options } = await axios.post('http://localhost:3000/api/webauthn/challenge',{
         email,
         userName,
