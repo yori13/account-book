@@ -10,6 +10,7 @@ import CashEditInput from './components/Edit/CashEditInput';
 import CreditEditInput from './components/Edit/CreditEditInput';
 import Login from './components/pages/Login';
 import MakeUser from './components/pages/MakeUser';
+import ExcelOutput from './components/pages/ExcelOutput';
 import { AuthProvider, useAuth } from './authLogin/AuthProvider';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/cash-edit-input" element={<PrivateRoute><CashEditInput /></PrivateRoute>} />
             <Route path="/credit-edit-input" element={<PrivateRoute><CreditEditInput /></PrivateRoute>} />
             <Route path="/make-user" element={<MakeUser />}/>
+            <Route path="/excel-output" element={<PrivateRoute><ExcelOutput /></PrivateRoute>} />
           </Routes>
         </HelmetProvider>
       </BrowserRouter>

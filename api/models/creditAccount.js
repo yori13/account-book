@@ -1,41 +1,31 @@
-module.exports = (sequelize, DataTypes) =>{
-  const CreditAccount = sequelize.define('CreditAccount',{
-    id:{
-      type:DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    date:{
-      type:DataTypes.DATEONLY,
-      allowNull: false
-    },
-    credit_price:{
-      type:DataTypes.INTEGER,
-      allowNull:false
-    },
-    category_code:{
-      type:DataTypes.INTEGER,
-      allowNull: false,
-      references:{
-        model:'credit_category',
-        key:'id'
-      }
-    },
-    category_detail_code:{
-      type:DataTypes.INTEGER,
-      allowNull: true
-    },
-    user_code:{
-      type:DataTypes.INTEGER,
-      allowNull: false,
-      references:{
-        model:'user',
-        key:'id'
-      }
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class creditAccount extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-  },{
-    tableName: 'credit_account',
-    timestamps: false
+  }
+  creditAccount.init({
+    date: DataTypes.DATEONLY,
+    credit_gasoline_price: DataTypes.INTEGER,
+    credit_phone_price: DataTypes.INTEGER,
+    credit_uniform_price: DataTypes.INTEGER,
+    credit_material_price: DataTypes.INTEGER,
+    credit_etc_price: DataTypes.INTEGER,
+    credit_other_price: DataTypes.INTEGER,
+    category_other_detail: DataTypes.TEXT,
+    user_code: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'creditAccount',
   });
-  return CreditAccount;
-}
+  return creditAccount;
+};

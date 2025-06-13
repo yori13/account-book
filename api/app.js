@@ -110,6 +110,11 @@ const getCreditUpdate = require('./routes/creditUpdate');
 app.use('/api/get-credit-update', getCreditUpdate);
 ///////////////////
 
+// Excel出力
+const getExcelOutput = require('./routes/getExcelOutput');
+app.use('/api/get-excel-output', getExcelOutput);
+///////////////////
+
 // dbへアクセス
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
