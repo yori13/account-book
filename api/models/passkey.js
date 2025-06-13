@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Passkey',
+    timestamps: false
   });
 
   return Passkey;
