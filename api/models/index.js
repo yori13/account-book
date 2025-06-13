@@ -11,6 +11,7 @@ const db = {
   cashPriceType: require('./cashPriceType')(sequelize, DataTypes),
   cashAccount: require('./cashAccount')(sequelize, DataTypes),
   user:require('./user')(sequelize,DataTypes),
+  passkey:require('./passkey')(sequelize,DataTypes),
   creditDetail: require('./creditDetail')(sequelize, DataTypes),
   creditCategory: require('./creditCategory')(sequelize, DataTypes),
   creditAccount: require('./creditAccount')(sequelize, DataTypes)

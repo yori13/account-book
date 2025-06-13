@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  // 正しいインポート
-import { auth, provider, signInWithPopup } from "../../authLogin/firebase";
+import { useNavigate } from "react-router-dom";
+import { auth, provider } from "../../authLogin/firebase";
+import { signInWithPopup } from 'firebase/auth';
+
 import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
@@ -17,6 +19,14 @@ const Login = () => {
       console.error(error.message);
     }
   };
+
+  const handleMakeUser = async () => {
+    try {
+      navigate("/make-user")
+    } catch (error) {
+
+    }
+  }
 
   return (
     <>
@@ -35,9 +45,25 @@ const Login = () => {
           <div className="text-center">
             <input 
               type="button" 
+              value={"生体認証でログイン"} 
+              onClick={handleGoogleLogin} 
+              className="border border-black hover:bg-blue-300 brack w-60 py-2 mt-10"
+            />
+          </div>
+          <div className="text-center">
+            <input 
+              type="button" 
               value={"Googleアカウントでログイン"} 
               onClick={handleGoogleLogin} 
-              className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 mt-24"
+              className="bg-blue-500 hover:bg-blue-300 text-white w-60 py-2 mt-10"
+            />
+          </div>
+          <div className="text-center">
+            <input 
+              type="button" 
+              value={"新規登録する"} 
+              onClick={handleMakeUser} 
+              className="border border-black hover:bg-blue-300 brack w-60 py-2 mt-10"
             />
           </div>
         </div>

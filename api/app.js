@@ -10,7 +10,31 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-app.use(cors());
+const session = require('express-session');
+
+// cookieの設定
+app.use(cookieParser());
+
+// corsの設定
+app.use(cors({
+  origin: 'http://localhost:8080',
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
+// 登録時に使用するセッション
+app.use(session({
+  secret: 'my-super-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // ローカル開発ならfalse、本番(HTTPS)ならtrue
+    maxAge: 1000 * 60 * 15, // 15分
+    ttpOnly: true, // 追加推奨
+    sameSite: 'lax' // Reactとのクッキー共有に必要（または 'none' にして secure:true）
+  }
+}));
+
 const PORT = process.env.PORT || 3001;
 
 // JSONボディをパースするミドルウェア
@@ -19,6 +43,21 @@ app.use(express.json());  // express.json()を使用
 // ログイン ////
 const authLoginRouter = require('./routes/authLogin');
 app.use('/api/authLogin', authLoginRouter);
+//////////////////
+
+// 新規ユーザー登録 ////
+const makeUsersRouter = require('./routes/webauthn/makeUsers');
+app.use('/api/makeUsers', makeUsersRouter);
+//////////////////
+
+// webauthnチャレンジレスポンス ////
+const challengeRouter = require('./routes/webauthn/generateChallenge');
+app.use('/api/webauthn/challenge', challengeRouter);
+//////////////////
+
+// 電子署名の照合 ////
+const verifyAttestationRouter = require('./routes/webauthn/verifyAttestation');
+app.use('/api/webauthn/verifyAttestation', verifyAttestationRouter);
 //////////////////
 
 // 現金出納帳登録 ////
@@ -87,7 +126,6 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
